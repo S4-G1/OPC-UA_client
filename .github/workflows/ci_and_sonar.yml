@@ -3,10 +3,10 @@ name: Java CI and Sonar
 on:
   pull_request:
     branches: 
-      - master
+      - main
   push:
     branches:
-      - master
+      - main
 
 jobs:
   test:
