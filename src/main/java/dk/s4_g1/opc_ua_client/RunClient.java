@@ -1,4 +1,4 @@
-package dk.G4_G1.opc_ua_client;
+package dk.s4_g1.opc_ua_client;
 
 public class RunClient {
     public static void main(String[] args) {

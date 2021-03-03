@@ -1,4 +1,4 @@
-package dk.G4_G1.opc_ua_client;
+package dk.s4_g1.opc_ua_client;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
