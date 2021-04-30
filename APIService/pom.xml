@@ -6,6 +6,7 @@
         <artifactId>S4G1ModulesParent</artifactId>
         <groupId>dk.s4_g1</groupId>
         <version>0.0.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
