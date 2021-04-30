@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 <modelVersion>4.0.0</modelVersion>
 <groupId>dk.s4_g1</groupId>
-<artifactId>core</artifactId>
+<artifactId>Core</artifactId>
 <packaging>jar</packaging>
 <version>0.0.1</version>
 
@@ -18,11 +18,13 @@
 </properties>
 
 <dependencies>
-    <!-- <dependency> -->
-    <!--     <groupId>dk.S4_G1</groupId> -->
-    <!--     <artifactId>Common</artifactId> -->
-    <!--     <version>1.0.1-SNAPSHOT</version> -->
-    <!-- </dependency> -->
+
+    <dependency>
+        <groupId>dk.s4_g1</groupId>
+        <artifactId>Common</artifactId>
+        <version>0.0.1</version>
+    </dependency>
+
 </dependencies>
 
 <!-- Build! -->

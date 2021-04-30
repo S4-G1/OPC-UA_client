@@ -25,8 +25,8 @@
 </properties>
 
 <modules>
-    <module>Core</module>
     <module>Common</module>
+    <module>Core</module>
 </modules>
 
 <dependencies>
