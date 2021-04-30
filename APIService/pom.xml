@@ -4,18 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>opc_ua_client</artifactId>
-        <groupId>dk.S4_G1</groupId>
+        <groupId>dk.s4_g1</groupId>
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Logger</artifactId>
+    <artifactId>APIService</artifactId>
     <dependencies>
         <dependency>
-            <groupId>dk.S4_G1</groupId>
+            <groupId>dk.s4_g1</groupId>
             <artifactId>Common</artifactId>
             <version>0.0.1</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.7.02</version>
         </dependency>
     </dependencies>
 
