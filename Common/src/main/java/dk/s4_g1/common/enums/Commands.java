@@ -1,26 +1,15 @@
-package dk.s4_g1.comman.enums;
+package dk.s4_g1.common.enums;
 
 public enum Commands {
-    
-    ZERO("Zero"),
-    RESET("Reset"),
-    START("Start"),
-    STOP("Stop"),
-    ABORT("Abort"),
-    CLEAR("Clear");
+    RESET(1),
+    START(2),
+    STOP(3),
+    ABORT(4),
+    CLEAR(5);
 
-    public final String cmd;
+    public final int id;
 
-    private Commands(String cmd) {
-        this.cmd = cmd;
-    }
-
-    public static Commands getCommand(String cmd) {
-        for (Commands command : Commands.values()){
-            if (command.cmd.equalsIgnoreCase(cmd)) {
-                return command;
-            }
-        }
-        return Commands.ZERO;
+    private Commands(int id) {
+        this.id = id;
     }
 }
