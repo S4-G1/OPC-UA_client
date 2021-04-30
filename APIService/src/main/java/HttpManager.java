@@ -23,8 +23,8 @@ public class HttpManager implements IAPIService {
 
     @Override
     public Response post(String endpoint, String data) {
-        LOGGER.info("Post");
-        var response = Unirest.post(String.format("%s/%s", URL, endpoint));
+        LOGGER.info(String.format("Post %s to %s", data, endpoint));
+        var response = Unirest.post(String.format("%s/%s", URL, endpoint)).body(data);
 
         var responseString = response.asString();
         return new Response(responseString.getStatus(), responseString.getBody().toString());
@@ -32,16 +32,16 @@ public class HttpManager implements IAPIService {
 
     @Override
     public Response put(String endpoint, String data) {
-        LOGGER.info("Put");
-        var response = Unirest.put(String.format("%s/%s", URL, endpoint));
+        LOGGER.info(String.format("Put %s to %s", data, endpoint));
+        var response = Unirest.put(String.format("%s/%s", URL, endpoint)).body(data);
 
         var responseString = response.asString();
         return new Response(responseString.getStatus(), responseString.getBody().toString());
     }
 
     @Override
-    public Response get(String endpoint, String data) {
-        LOGGER.info("Get");
+    public Response get(String endpoint) {
+        LOGGER.info(String.format("Get from %s", endpoint));
         var response = Unirest.get(String.format("%s/%s", URL, endpoint));
 
         var responseString = response.asString();
