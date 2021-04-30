@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project>
 <modelVersion>4.0.0</modelVersion>
 
 <parent>
@@ -9,20 +8,7 @@
     <version>0.0.1</version>
 </parent>
 
-<groupId>dk.s4_g1</groupId>
 <artifactId>Common</artifactId>
-<packaging>jar</packaging>
-<version>0.0.1</version>
-
-<properties>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <project.java.version>15</project.java.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-    <maven.compiler.source>${project.java.version}</maven.compiler.source>
-    <maven.compiler.target>${project.java.version}</maven.compiler.target>
-
-</properties>
 
 <dependencies>
 </dependencies>
