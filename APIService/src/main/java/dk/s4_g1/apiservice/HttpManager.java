@@ -1,3 +1,5 @@
+package dk.s4_g1.apiservice;
+
 import dk.s4_g1.common.data.Response;
 import dk.s4_g1.common.services.IAPIService;
 import kong.unirest.Unirest;
@@ -23,28 +25,25 @@ public class HttpManager implements IAPIService {
 
     @Override
     public Response post(String endpoint, String data) {
-        LOGGER.info(String.format("Post %s to %s", data, endpoint));
         var response = Unirest.post(String.format("%s/%s", URL, endpoint)).body(data);
 
         var responseString = response.asString();
-        return new Response(responseString.getStatus(), responseString.getBody().toString());
+        return new Response(responseString.getStatus(), responseString.getBody());
     }
 
     @Override
     public Response put(String endpoint, String data) {
-        LOGGER.info(String.format("Put %s to %s", data, endpoint));
         var response = Unirest.put(String.format("%s/%s", URL, endpoint)).body(data);
 
         var responseString = response.asString();
-        return new Response(responseString.getStatus(), responseString.getBody().toString());
+        return new Response(responseString.getStatus(), responseString.getBody());
     }
 
     @Override
     public Response get(String endpoint) {
-        LOGGER.info(String.format("Get from %s", endpoint));
         var response = Unirest.get(String.format("%s/%s", URL, endpoint));
 
         var responseString = response.asString();
-        return new Response(responseString.getStatus(), responseString.getBody().toString());
+        return new Response(responseString.getStatus(), responseString.getBody());
     }
 }
