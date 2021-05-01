@@ -1,4 +1,4 @@
-package dk.s4_g1.comman.enums;
+package dk.s4_g1.common.enums;
 
 import java.util.Optional;
 
