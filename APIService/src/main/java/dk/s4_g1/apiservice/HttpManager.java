@@ -10,6 +10,7 @@ public class HttpManager implements IAPIService {
 
     private static final String URL = "https://api.bierproductie.nymann.dev";
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final String FORMAT = "%s/%s";
 
     public HttpManager(){
         try {
@@ -25,7 +26,7 @@ public class HttpManager implements IAPIService {
 
     @Override
     public Response post(String endpoint, String data) {
-        var response = Unirest.post(String.format("%s/%s", URL, endpoint)).body(data);
+        var response = Unirest.post(String.format(FORMAT, URL, endpoint)).body(data);
 
         var responseString = response.asString();
         return new Response(responseString.getStatus(), responseString.getBody());
@@ -33,7 +34,7 @@ public class HttpManager implements IAPIService {
 
     @Override
     public Response put(String endpoint, String data) {
-        var response = Unirest.put(String.format("%s/%s", URL, endpoint)).body(data);
+        var response = Unirest.put(String.format(FORMAT, URL, endpoint)).body(data);
 
         var responseString = response.asString();
         return new Response(responseString.getStatus(), responseString.getBody());
@@ -41,7 +42,7 @@ public class HttpManager implements IAPIService {
 
     @Override
     public Response get(String endpoint) {
-        var response = Unirest.get(String.format("%s/%s", URL, endpoint));
+        var response = Unirest.get(String.format(FORMAT, URL, endpoint));
 
         var responseString = response.asString();
         return new Response(responseString.getStatus(), responseString.getBody());
