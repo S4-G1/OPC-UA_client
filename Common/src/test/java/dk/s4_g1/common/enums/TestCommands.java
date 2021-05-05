@@ -3,10 +3,10 @@ package dk.s4_g1.common.enums;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-public class TestCommands {
+class TestCommands {
 
     @Test
-    public void testEnumsHasTheRightID(){
+    void testEnumsHasTheRightID(){
         assertEquals(1, Commands.RESET.id);
         assertEquals(2, Commands.START.id);
         assertEquals(3, Commands.STOP.id);
