@@ -4,24 +4,22 @@ import java.util.Optional;
 
 public enum Recipes {
 
-    PILSNER("Pilsner", 600),
-    WHEAT("Wheat", 300),
-    IPA("IPA", 150),
-    STOUT("Stout", 200),
-    ALE("Ale", 100),
-    ALCOHOL_FREE("Alcohol Free", 125);
+    PILSNER(600),
+    WHEAT(300),
+    IPA(150),
+    STOUT(200),
+    ALE(100),
+    ALCOHOL_FREE(125);
 
-    public final String name;
     public final int speedLimit;
 
-    private Recipes(String name, int speedLimit) {
-        this.name = name;
+    private Recipes(int speedLimit) {
         this.speedLimit = speedLimit;
     }
 
     public static Optional<Recipes> getProduct(String name) {
         for (Recipes product : Recipes.values()) {
-            if (name.equalsIgnoreCase(product.name)) {
+            if (name.equalsIgnoreCase(product.name())) {
                 return Optional.of(product);
             }
         }
