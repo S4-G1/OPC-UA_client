@@ -11,17 +11,17 @@ public enum Recipes {
     ALE("Ale", 100),
     ALCOHOL_FREE("Alcohol Free", 125);
 
-    public final String output;
+    public final String name;
     public final int speedLimit;
 
-    private Recipes(String output, int speedLimit) {
-        this.output = output;
+    private Recipes(String name, int speedLimit) {
+        this.name = name;
         this.speedLimit = speedLimit;
     }
 
     public static Optional<Recipes> getProduct(String name) {
         for (Recipes product : Recipes.values()) {
-            if (name.equalsIgnoreCase(product.output)) {
+            if (name.equalsIgnoreCase(product.name)) {
                 return Optional.of(product);
             }
         }
