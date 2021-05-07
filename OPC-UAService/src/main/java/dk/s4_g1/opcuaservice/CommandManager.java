@@ -17,7 +17,7 @@ import dk.s4_g1.common.services.ICommandService;
 
 public class CommandManager implements ICommandService{
 
-    OpcUaClient client;
+    private OpcUaClient client;
 
     public CommandManager(){
         try{
@@ -31,13 +31,13 @@ public class CommandManager implements ICommandService{
             client = OpcUaClient.create(configBuilder.build());
             client.connect().get();
         } catch (Exception e){
-            System.err.println("Something went wrong!");
+            e.printStackTrace();
         }
     }
 
     @Override
     public boolean sendCmdBool(Nodes node, boolean value) {
-        DataValue dataValue = createDataValue(new Variant(value));
+        var dataValue = createDataValue(new Variant(value));
         if(dataValue == null){
             return false;
         }
@@ -47,7 +47,7 @@ public class CommandManager implements ICommandService{
 
     @Override
     public boolean sendCmdFloat(Nodes node, float value) {
-        DataValue dataValue = createDataValue(new Variant(value));
+        var dataValue = createDataValue(new Variant(value));
         if(dataValue == null){
             return false;
         }
@@ -57,7 +57,7 @@ public class CommandManager implements ICommandService{
 
     @Override
     public boolean sendCmdInt(Nodes node, int value) {
-        DataValue dataValue = createDataValue(new Variant(value));
+        var dataValue = createDataValue(new Variant(value));
         if(dataValue == null){
             return false;
         }
@@ -68,10 +68,9 @@ public class CommandManager implements ICommandService{
 
     private DataValue createDataValue(Variant v){
         try{
-            DataValue dv = DataValue.valueOnly(v);
-            return dv;
+            return DataValue.valueOnly(v);
         } catch(Exception e){
-            System.err.println("Cannot create DataValue");
+            e.printStackTrace();
             return null;
         }
     }
@@ -83,10 +82,7 @@ public class CommandManager implements ICommandService{
     private boolean writeValue(Nodes node, DataValue dv){
         try{
             client.writeValue(createNodeId(node), dv).get();
-        } catch(InterruptedException e){
-            e.printStackTrace();
-            return false;
-        } catch (ExecutionException e){
+        } catch(InterruptedException | ExecutionException e){
             e.printStackTrace();
             return false;
         }
