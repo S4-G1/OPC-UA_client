@@ -31,7 +31,7 @@ public class CommandManager implements ICommandService{
             client = OpcUaClient.create(configBuilder.build());
             client.connect().get();
         } catch (Exception e){
-            e.printStackTrace();
+            
         }
     }
 
@@ -70,7 +70,6 @@ public class CommandManager implements ICommandService{
         try{
             return DataValue.valueOnly(v);
         } catch(Exception e){
-            e.printStackTrace();
             return null;
         }
     }
@@ -83,7 +82,6 @@ public class CommandManager implements ICommandService{
         try{
             client.writeValue(createNodeId(node), dv).get();
         } catch(InterruptedException | ExecutionException e){
-            e.printStackTrace();
             return false;
         }
 
