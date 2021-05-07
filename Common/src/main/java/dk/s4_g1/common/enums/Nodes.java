@@ -9,7 +9,7 @@ public enum Nodes {
 
     NEXT_MACHINE_SPEED("::Program:Cube.Command.MachSpeed"),
     NEXT_MACHINE_COMMAND("::Program:Cube.Command.CntrlCmd"),
-    NEXT_NEXT_BATCH_ID("::Program:Cube.Command.Parameter[0].Value"),
+    NEXT_BATCH_ID("::Program:Cube.Command.Parameter[0].Value"),
     NEXT_PRODUCT_ID_FOR("::Program:Cube.Command.Parameter[1].Value"),
     NEXT_PRODUCT_AMOUNT("::Program:Cube.Command.Parameter[2].Value"),
     EXECUTE_MACHINE_CMD("::Program:Cube.Command.CmdChangeRequest"),
