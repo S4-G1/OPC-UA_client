@@ -10,6 +10,13 @@ class TestHttpManager {
     private String endpoint = "Test";
 
     @Test
+    void TestConstructor(){
+        //Assert that the constructor doens't throw an exception
+        new HttpManager();
+        assertDoesNotThrow(() -> new HttpManager());
+    }
+
+    @Test
     void post(){
         //Mock HttpManager Object
         HttpManager manager = mock(HttpManager.class);
@@ -35,7 +42,7 @@ class TestHttpManager {
     @Test
     void endpointFormat(){
         HttpManager manager = new HttpManager();
-
+        
         assertEquals("https://api.bierproductie.nymann.dev/Test", manager.endpointFormat(endpoint));
     }
 }
