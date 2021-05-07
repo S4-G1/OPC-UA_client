@@ -9,7 +9,7 @@ public class Response {
         this.body = body;
     }
 
-    public boolean isClientError(){
-        return this.statusCode > 300 && this.statusCode < 400;
+    public boolean isOK(){
+        return this.statusCode >= 200 && this.statusCode < 300;
     }
 }
