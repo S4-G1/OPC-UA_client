@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import dk.s4_g1.common.data.Response;
 
-public class TestResponse {
+class TestResponse {
     
     @Test
     void isOK(){
@@ -16,8 +16,10 @@ public class TestResponse {
 
     @Test
     void isNotOK(){
-        Response r = new Response(300, "Response object created");
+        Response r1 = new Response(300, "Response object created");
+        Response r2 = new Response(199, "Response object created");
 
-        assertFalse(r.isOK());
+        assertFalse(r1.isOK());
+        assertFalse(r2.isOK());
     }
 }
