@@ -19,7 +19,7 @@ public class CommandManager implements ICommandService{
 
     private OpcUaClient client;
 
-    public CommandManager(){
+    public CommandManager() throws InterruptedException {
         try{
             //Create list of endpoints
             List<EndpointDescription> endpoints =  DiscoveryClient.getEndpoints("opc.tcp://127.0.0.1:4840").get();
@@ -31,7 +31,7 @@ public class CommandManager implements ICommandService{
             client = OpcUaClient.create(configBuilder.build());
             client.connect().get();
         } catch (Exception e){
-            
+            Thread.currentThread().interrupt();
         }
     }
 
