@@ -26,7 +26,7 @@ public class HttpManager implements IAPIService {
 
     @Override
     public Response post(String endpoint, String data) {
-        var response = Unirest.post(String.format(FORMAT, URL, endpoint)).body(data);
+        var response = Unirest.post(endpointFormat(endpoint)).body(data);
 
         var responseString = response.asString();
         return new Response(responseString.getStatus(), responseString.getBody());
@@ -34,7 +34,7 @@ public class HttpManager implements IAPIService {
 
     @Override
     public Response put(String endpoint, String data) {
-        var response = Unirest.put(String.format(FORMAT, URL, endpoint)).body(data);
+        var response = Unirest.put(endpointFormat(endpoint)).body(data);
 
         var responseString = response.asString();
         return new Response(responseString.getStatus(), responseString.getBody());
@@ -42,9 +42,13 @@ public class HttpManager implements IAPIService {
 
     @Override
     public Response get(String endpoint) {
-        var response = Unirest.get(String.format(FORMAT, URL, endpoint));
+        var response = Unirest.get(endpointFormat(endpoint));
 
         var responseString = response.asString();
         return new Response(responseString.getStatus(), responseString.getBody());
+    }
+
+    public String endpointFormat(String endpoint){
+        return String.format(FORMAT, URL, endpoint);
     }
 }
