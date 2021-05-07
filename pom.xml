@@ -23,6 +23,7 @@
         <module>Common</module>
         <module>Core</module>
         <module>APIService</module>
+        <module>OPC-UAService</module>
     </modules>
 
     <!-- Dependencies for all projects! -->
