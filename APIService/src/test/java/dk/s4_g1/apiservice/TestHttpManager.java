@@ -7,19 +7,13 @@ import dk.s4_g1.common.data.Response;
 
 class TestHttpManager {
 
-    private String endpoint = "Test";
-
-    @Test
-    void TestConstructor(){
-        //Assert that the constructor doens't throw an exception
-        new HttpManager();
-        assertDoesNotThrow(() -> new HttpManager());
-    }
+    HttpManager manager = new HttpManager();
+    private String endpoint = "inventory_statuses";
 
     @Test
     void post(){
         //Mock HttpManager Object
-        HttpManager manager = mock(HttpManager.class);
+        HttpManager mockManager = mock(HttpManager.class);
 
         //Create json String
         String json = """
@@ -31,18 +25,30 @@ class TestHttpManager {
         """;
 
         //Setup rule that returns new Response when manager.post is called
-        when(manager.post(endpoint, json)).thenReturn(new Response(201, json));
+        when(mockManager.post(endpoint, json)).thenReturn(new Response(201, json));
 
-        Response r = manager.post(endpoint, json);
+        Response r = mockManager.post(endpoint, json);
         assertEquals(201, r.statusCode);
         assertEquals(json, r.body);
-        verify(manager).post(endpoint, json);
+        verify(mockManager).post(endpoint, json);
+    }
+
+    @Test
+    void getValidEndpoint(){
+        Response r = manager.get(endpoint);
+
+        assertEquals(200, r.statusCode);
+    }
+
+    @Test
+    void getInvalidEndpoint(){
+        Response r = manager.get("Invalid");
+
+        assertEquals(404, r.statusCode);
     }
 
     @Test
     void endpointFormat(){
-        HttpManager manager = new HttpManager();
-        
-        assertEquals("https://api.bierproductie.nymann.dev/Test", manager.endpointFormat(endpoint));
+        assertEquals("https://api.bierproductie.nymann.dev/inventory_statuses", manager.endpointFormat(endpoint));
     }
 }
