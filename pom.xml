@@ -1,98 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<modelVersion>4.0.0</modelVersion>
-<groupId>dk.S4_G1</groupId>
-<artifactId>opc_ua_client</artifactId>
-<packaging>jar</packaging>
-<version>0.0.1</version>
+<project>
+    <modelVersion>4.0.0</modelVersion>
 
-<properties>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <project.java.version>15</project.java.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <groupId>dk.s4_g1</groupId>
+    <artifactId>S4G1ModulesParent</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1</version>
 
-    <maven.compiler.source>${project.java.version}</maven.compiler.source>
-    <maven.compiler.target>${project.java.version}</maven.compiler.target>
+    <properties>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.java.version>15</project.java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.projectKey>S4-G1_OPC-UA_client</sonar.projectKey>
-    <sonar.organization>s4-g1</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.exclusions>
-        **/RunClient.java,
-    </sonar.exclusions>
-</properties>
+        <maven.compiler.source>${project.java.version}</maven.compiler.source>
+        <maven.compiler.target>${project.java.version}</maven.compiler.target>
 
-<dependencies>
+        <sonar.organization>s4-g1</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    </properties>
 
-    <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter</artifactId>
-        <version>5.5.2</version>
-        <scope>test</scope>
-    </dependency>
+    <modules>
+        <module>Common</module>
+        <module>Core</module>
+        <module>APIService</module>
+    </modules>
 
-</dependencies>
+    <!-- Dependencies for all projects! -->
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.6.28</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-<!-- Build! -->
-<build>
-    <plugins>
-        <!-- Build -> plugin -> surefire -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M5</version>
-        </plugin>
-        <!-- Build -> plugin -> jacoco -->
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.6</version>
-            <executions>
-                <execution>
-                    <id>coverage-initialize</id>
-                    <goals>
-                        <goal>prepare-agent</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>coverage-report</id>
-                    <phase>post-integration-test</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+    <!-- Plugings for all projects! -->
+    <build>
+        <plugins>
+            <plugin>
+                <!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+            </plugin>
 
-        <!-- Plugin for chosing a main file -->
-        <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.2.0</version>
-            <configuration>
-                <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-                <archive>
-                    <manifest>
-                        <mainClass>dk.G4_G1.opc_ua_client.RunClient</mainClass>
-                    </manifest>
-                </archive>
-                <appendAssemblyId>false</appendAssemblyId>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>make-assembly</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+            <plugin>
+                <!-- Jacoco requires for sonar to get coverage of files -->
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <id>coverage-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
 
-    </plugins>
-</build>
-
+                    <execution>
+                        <id>coverage-report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

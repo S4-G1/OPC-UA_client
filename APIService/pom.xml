@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>S4G1ModulesParent</artifactId>
+        <groupId>dk.s4_g1</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>APIService</artifactId>
+
+    <!-- Dependencies! -->
+    <dependencies>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>Common</artifactId>
+            <version>0.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.7.02</version>
+        </dependency>
+    </dependencies>
+
+</project>
