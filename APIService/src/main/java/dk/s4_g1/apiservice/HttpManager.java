@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 public class HttpManager implements IAPIService {
 
     private static final String URL = "https://api.bierproductie.nymann.dev";
-    private static final Logger logger = LogManager.getLogger();
+    private static Logger LOGGER = LogManager.getLogger(HttpManager.class);
     private static final String FORMAT = "%s/%s";
 
     public HttpManager(){
@@ -21,7 +21,7 @@ public class HttpManager implements IAPIService {
                     .followRedirects(true)
                     .enableCookieManagement(false);
         } catch (UnirestConfigException e) {
-            logger.warn("Unirest is already configured, skipping: {}", e);
+            LOGGER.warn("Unirest is already configured, skipping: {}", e);
         }
     }
 

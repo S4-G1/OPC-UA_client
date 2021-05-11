@@ -10,8 +10,7 @@ import org.eclipse.milo.opcua.stack.client.DiscoveryClient;
 import org.eclipse.milo.opcua.stack.core.UaException;
 import org.eclipse.milo.opcua.stack.core.types.builtin.*;
 import org.eclipse.milo.opcua.stack.core.types.structured.EndpointDescription;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import dk.s4_g1.common.enums.Nodes;
 import dk.s4_g1.common.services.ICommandService;
@@ -19,7 +18,8 @@ import dk.s4_g1.common.services.ICommandService;
 public class CommandManager implements ICommandService{
 
     private OpcUaClient client;
-    private static Logger logger = LogManager.getLogger();
+    private static Logger LOGGER = LogManager.getLogger();
+    private static final Marker IMPORTANT = MarkerManager.getMarker("IMPORTANT");
 
     public CommandManager() throws InterruptedException {
         //Create list of endpoints
@@ -27,12 +27,11 @@ public class CommandManager implements ICommandService{
         try {
             endpoints =  DiscoveryClient.getEndpoints("opc.tcp://127.0.0.1:4840").get();
         } catch(ExecutionException e){
-            logger.error("OpcUaClient can't connect: {}", e);
+            LOGGER.error(IMPORTANT, "OpcUaClient can't connect: {}", e);
             Thread.currentThread().interrupt();
             return;
         }
 
-        //catch(ExecutionException e){}
         //Create config builder
         OpcUaClientConfigBuilder configBuilder = new OpcUaClientConfigBuilder().setIdentityProvider(new UsernameProvider("sdu", "1234"));
         //Set endpoint
@@ -41,14 +40,14 @@ public class CommandManager implements ICommandService{
         try {
             client = OpcUaClient.create(configBuilder.build());
         } catch(UaException e){
-            logger.error("can't create a OpcUaClient: {}", e);
+            LOGGER.error(IMPORTANT, "can't create a OpcUaClient: {}", e);
             return;
         }
 
         try {
             client.connect().get();
         } catch(ExecutionException e){
-            logger.error("OpcUaClient can't connect: {}", e);
+            LOGGER.error(IMPORTANT, "OpcUaClient can't connect: {}", e);
             Thread.currentThread().interrupt();
         }
     }
@@ -77,8 +76,9 @@ public class CommandManager implements ICommandService{
         try{
             client.writeValue(createNodeId(node), dataValue).get();
         } catch(InterruptedException | ExecutionException e){
-            logger.error("Can't write value: {}", e);
+            LOGGER.warn(IMPORTANT, "Can't write value: {}", e);
             Thread.currentThread().interrupt();
+            return false;
         }
 
         return true;
