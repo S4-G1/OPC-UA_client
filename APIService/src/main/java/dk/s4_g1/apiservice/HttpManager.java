@@ -4,12 +4,13 @@ import dk.s4_g1.common.data.Response;
 import dk.s4_g1.common.services.IAPIService;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestConfigException;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class HttpManager implements IAPIService {
 
     private static final String URL = "https://api.bierproductie.nymann.dev";
-    private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = LogManager.getLogger();
     private static final String FORMAT = "%s/%s";
 
     public HttpManager(){
@@ -20,7 +21,7 @@ public class HttpManager implements IAPIService {
                     .followRedirects(true)
                     .enableCookieManagement(false);
         } catch (UnirestConfigException e) {
-            LOGGER.warning("Unirest is already configured, skipping");
+            logger.warn("Unirest is already configured, skipping: {}", e);
         }
     }
 
