@@ -29,6 +29,7 @@ public class CommandManager implements ICommandService{
         } catch(ExecutionException e){
             logger.error("OpcUaClient can't connect: {}", e);
             Thread.currentThread().interrupt();
+            return;
         }
 
         //catch(ExecutionException e){}
