@@ -12,7 +12,6 @@ public class HttpManager implements IAPIService {
 
     private static final String FORMAT = "%s/%s";
     private static Logger logger = LogManager.getLogger(HttpManager.class);
-    private static IConfigService configLoader;
     private static String url;
 
     public HttpManager() {
@@ -26,8 +25,15 @@ public class HttpManager implements IAPIService {
             logger.warn("Unirest is already configured, skipping");
         }
 
-        configLoader = java.util.ServiceLoader.load(IConfigService.class).findFirst().get();
-        url = configLoader.getConfig("API_URL").get();
+        var OptionalConfigLoader = java.util.ServiceLoader.load(IConfigService.class).findFirst();
+        if (OptionalConfigLoader.isPresent()) {
+            url =
+                    OptionalConfigLoader.get()
+                            .getConfig("API_URL")
+                            .orElse("https://api.bierproductie.nymann.dev");
+        } else {
+            url = "https://api.bierproductie.nymann.dev";
+        }
 
         logger.info("IAPIService - HttpManger Created");
     }

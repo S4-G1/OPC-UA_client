@@ -24,10 +24,20 @@ public class CommandManager implements ICommandService {
     public CommandManager() throws InterruptedException {
         configLoader = java.util.ServiceLoader.load(IConfigService.class).findFirst().get();
         // Create list of endpoints
+
+        String url;
+        var OptionalConfigLoader = java.util.ServiceLoader.load(IConfigService.class).findFirst();
+        if (OptionalConfigLoader.isPresent()) {
+            url =
+                    OptionalConfigLoader.get()
+                            .getConfig("API_URL")
+                            .orElse("https://api.bierproductie.nymann.dev");
+        } else {
+            url = "https://api.bierproductie.nymann.dev";
+        }
         List<EndpointDescription> endpoints = null;
         try {
-            endpoints =
-                    DiscoveryClient.getEndpoints(configLoader.getConfig("BEER_URL").get()).get();
+            endpoints = DiscoveryClient.getEndpoints(url).get();
         } catch (ExecutionException e) {
             logger.error("OpcUaClient can't connect");
             Thread.currentThread().interrupt();
