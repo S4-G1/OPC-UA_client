@@ -10,7 +10,6 @@ public class HttpManager implements IAPIService {
 
     private static final String URL = "https://api.bierproductie.nymann.dev";
     private static Logger logger = LogManager.getLogger(HttpManager.class);
-    private static final Marker API = MarkerManager.getMarker("API");
     private static final String FORMAT = "%s/%s";
 
     public HttpManager(){
@@ -21,7 +20,7 @@ public class HttpManager implements IAPIService {
                     .followRedirects(true)
                     .enableCookieManagement(false);
         } catch (UnirestConfigException e) {
-            logger.warn(API, "Unirest is already configured, skipping");
+            logger.warn("Unirest is already configured, skipping");
         }
     }
 

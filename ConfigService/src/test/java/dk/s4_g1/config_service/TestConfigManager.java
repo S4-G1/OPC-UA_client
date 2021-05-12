@@ -16,7 +16,6 @@ class TestConfigManager {
     ConfigManager cm;
 
     private static Logger logger = LogManager.getLogger(ConfigManager.class);
-    private static final Marker CONFIG = MarkerManager.getMarker("TEST--CONFIG--TEST");
 
     TestConfigManager(){
         cm = new ConfigManager();
@@ -78,13 +77,13 @@ class TestConfigManager {
                 writer.close();
             }
         } catch (IOException e) {
-            logger.error(CONFIG, "IO exeception. read only fs? {}", e);
+            logger.error("IO exeception. read only fs? {}", e);
         }
     }
 
     private void destroyFile(){
             if (!new File("config").delete()) {
-                logger.error(CONFIG, "Could not delete config");
+                logger.error("Could not delete config");
             } 
     }
 }
