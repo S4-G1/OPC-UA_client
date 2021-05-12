@@ -12,11 +12,11 @@ public class ConfigManager implements IConfigService {
 
     private static Logger logger = LogManager.getLogger(ConfigManager.class);
     private static final Marker CONFIG = MarkerManager.getMarker("CONFIG");
-    private static HashMap<String, String> keyset;
+    private HashMap<String, String> keyset;
 
 
     public ConfigManager(){
-        keyset = new HashMap<String, String>();
+        keyset = new HashMap<>();
         keyset.put("API_URL", "https://api.bierproductie.nymann.dev");
         keyset.put("BEER_URL", "opc.tcp://127.0.0.1:4840");
         keyset.put("BEER_PASSWORD", "1234");
@@ -28,23 +28,23 @@ public class ConfigManager implements IConfigService {
     public Optional<String> getConfig(String key){
         String variable = getEnv(key);
         if (variable != null) {
-            logger.info(CONFIG, "Key: {}, is {}", key, variable);
+            logger.info(CONFIG, "Loaded key: {} from enviromt variable. Key is: {}", key, variable);
             return Optional.of(variable);
         }
 
         variable = variableByFile(key);
         if (variable != null) {
-            logger.info(CONFIG, "Key: {}, is {}", key, variable);
+            logger.info(CONFIG, "Loaded key: {} from file. Key is: {}", key, variable);
             return Optional.of(variable);
         }
 
         variable = keyset.get(key);
         if (variable != null) {
-            logger.info(CONFIG, "Key: {}, is {}", key, variable);
+            logger.info(CONFIG, "Loaded key: {} from ConfigManager. Key is: {}", key, variable);
             return Optional.of(variable);
         }
 
-        logger.error(CONFIG, "Key: {}, Does not exites", key);
+        logger.error(CONFIG, "Tried to load key: {}, Does not exites", key);
         return Optional.empty();
     }
 
@@ -53,10 +53,7 @@ public class ConfigManager implements IConfigService {
     }
 
     private String variableByFile(String key) {
-        Scanner reader = null;
-        try {
-            File fConfig = new File("config");
-            reader = new Scanner(fConfig);
+        try (Scanner reader = new Scanner(new File("config"))){
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 var linesplit = line.split("=");
@@ -68,13 +65,8 @@ public class ConfigManager implements IConfigService {
                     return varialbe;
                 }
             }
-        } catch (FileNotFoundException e) {
-            logger.warn(CONFIG, "Config file not founded {}", e);
-        } finally {
-            if (reader != null){
-                reader.close();
-            }
-
+        } catch (FileNotFoundException _e) {
+            logger.warn("Config file not founded");
         }
         return null;
     }

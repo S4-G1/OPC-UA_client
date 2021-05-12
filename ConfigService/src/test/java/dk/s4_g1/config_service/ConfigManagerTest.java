@@ -37,7 +37,7 @@ class ConfigManagerTest {
 
 
     @Test
-    public void test(){
+    void test(){
         ConfigManager cmSpy = spy(ConfigManager.class);
         when(cmSpy.getEnv("API_URL")).thenReturn("https://api.bierproductie.nymann.dev/3");
         assertEquals(Optional.of("https://api.bierproductie.nymann.dev/3"), cmSpy.getConfig("API_URL"));
