@@ -12,7 +12,7 @@
 
     <properties>
         <sonar.exclusions>
-            dk/s4_g1/opcuaservice/CommandManager.java
+            OPC-UAService/src/main/java/dk/s4_g1/opcuaservice/CommandManager.java
         </sonar.exclusions>
     </properties>
 
