@@ -4,6 +4,7 @@ import dk.s4_g1.common.services.IConfigService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 import org.apache.logging.log4j.*;
@@ -11,20 +12,21 @@ import org.apache.logging.log4j.*;
 public class ConfigManager implements IConfigService {
 
     private static Logger logger = LogManager.getLogger(ConfigManager.class);
-    private HashMap<String, String> keyset;
+    private Map<String, String> keyset;
 
 
-    public ConfigManager(){
-        keyset = new HashMap<>();
-        keyset.put("API_URL", "https://api.bierproductie.nymann.dev");
-        keyset.put("BEER_URL", "opc.tcp://127.0.0.1:4840");
-        keyset.put("BEER_PASSWORD", "1234");
-        keyset.put("BEER_USER", "sdu");
+    public ConfigManager() {
+        keyset = new HashMap<>(Map.of(
+                   "API_URL", "https://api.bierproductie.nymann.dev",
+                   "BEER_URL", "opc.tcp://127.0.0.1:4840",
+                   "BEER_USER", "sdu",
+                   "BEER_PASSWORD", "1234"
+                   ));
         logger.info("ConfigManger Created");
     }
 
     @Override
-    public Optional<String> getConfig(String key){
+    public Optional<String> getConfig(String key) {
         String variable = getEnv(key);
         if (variable != null) {
             logger.info("Loaded key: {} from enviromt variable. Key is: {}", key, variable);
