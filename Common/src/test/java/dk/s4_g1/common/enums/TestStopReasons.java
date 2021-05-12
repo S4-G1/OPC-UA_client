@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.Optional;
 
-public class TestStopReasons {
+class TestStopReasons {
 
     @Test
     void TestIdStopReasons(){

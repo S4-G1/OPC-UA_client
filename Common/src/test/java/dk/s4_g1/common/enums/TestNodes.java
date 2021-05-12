@@ -3,23 +3,29 @@ package dk.s4_g1.common.enums;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-public class TestNodes {
+class TestNodes {
 
     @Test
-    void testNodesEnum(){
+    void testNameSpaceIndex(){
         assertEquals(6, Nodes.STATE.namespaceIndex);
-        assertEquals("::Program:Cube.Admin.ProdProcessedCount", Nodes.PRODUCED_PRODUCTS.node);
-        assertEquals("::Program:Cube.Admin.ProdDefectiveCount", Nodes.DEFECTIVE_PRODUCTS.node);
-        assertEquals("::Program:Cube.Admin.StopReason.ID", Nodes.STOP_REASON_ID.node);
-        assertEquals("::Program:Cube.Admin.StopReason.Value", Nodes.STOP_REASON_VALUE.node);
-        assertEquals("::Program:Cube.Admin.Parameter[0].Value", Nodes.BATCH_PRODUCT_ID.node);
+    }
 
+    @Test
+    void testCommandNode(){
         assertEquals("::Program:Cube.Command.MachSpeed", Nodes.NEXT_MACHINE_SPEED.node);
         assertEquals("::Program:Cube.Command.CntrlCmd", Nodes.NEXT_MACHINE_COMMAND.node);
         assertEquals("::Program:Cube.Command.Parameter[0].Value", Nodes.NEXT_BATCH_ID.node);
         assertEquals("::Program:Cube.Command.Parameter[1].Value", Nodes.NEXT_PRODUCT_ID_FOR.node);
         assertEquals("::Program:Cube.Command.Parameter[2].Value", Nodes.NEXT_PRODUCT_AMOUNT.node);
         assertEquals("::Program:Cube.Command.CmdChangeRequest", Nodes.EXECUTE_MACHINE_CMD.node);
+    }
+
+    void testStatusNode(){
+        assertEquals("::Program:Cube.Admin.ProdProcessedCount", Nodes.PRODUCED_PRODUCTS.node);
+        assertEquals("::Program:Cube.Admin.ProdDefectiveCount", Nodes.DEFECTIVE_PRODUCTS.node);
+        assertEquals("::Program:Cube.Admin.StopReason.ID", Nodes.STOP_REASON_ID.node);
+        assertEquals("::Program:Cube.Admin.StopReason.Value", Nodes.STOP_REASON_VALUE.node);
+        assertEquals("::Program:Cube.Admin.Parameter[0].Value", Nodes.BATCH_PRODUCT_ID.node);
 
         assertEquals("::Program:Cube.Status.StateCurrent", Nodes.STATE.node);
         assertEquals("::Program:Cube.Status.MachSpeed", Nodes.SPEED.node);
