@@ -12,7 +12,7 @@ public class HttpManager implements IAPIService {
 
     private static final String FORMAT = "%s/%s";
     private static Logger logger = LogManager.getLogger(HttpManager.class);
-    private static String url;
+    private String url;
 
     public HttpManager() {
         try {
@@ -25,10 +25,11 @@ public class HttpManager implements IAPIService {
             logger.warn("Unirest is already configured, skipping");
         }
 
-        var OptionalConfigLoader = java.util.ServiceLoader.load(IConfigService.class).findFirst();
-        if (OptionalConfigLoader.isPresent()) {
+        var optionalConfigLoader = java.util.ServiceLoader.load(IConfigService.class).findFirst();
+        if (optionalConfigLoader.isPresent()) {
             url =
-                    OptionalConfigLoader.get()
+                    optionalConfigLoader
+                            .get()
                             .getConfig("API_URL")
                             .orElse("https://api.bierproductie.nymann.dev");
         } else {
