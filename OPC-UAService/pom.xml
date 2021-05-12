@@ -10,6 +10,12 @@
 
     <artifactId>OPC-UAService</artifactId>
 
+    <properties>
+        <sonar.exclusions>
+            dk/s4_g1/opcuaservice/CommandManager.java
+        </sonar.exclusions>
+    </properties>
+
     <!-- Dependencies! -->
     <dependencies>
         <dependency>
