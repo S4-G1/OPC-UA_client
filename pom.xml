@@ -21,9 +21,10 @@
 
     <modules>
         <module>Common</module>
-        <module>Core</module>
+        <module>ConfigService</module>
         <module>APIService</module>
         <module>OPC-UAService</module>
+        <module>Core</module>
     </modules>
 
     <!-- Dependencies for all projects! -->
