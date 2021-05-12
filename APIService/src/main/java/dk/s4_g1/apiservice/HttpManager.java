@@ -2,8 +2,10 @@ package dk.s4_g1.apiservice;
 
 import dk.s4_g1.common.data.Response;
 import dk.s4_g1.common.services.IAPIService;
+
 import kong.unirest.Unirest;
 import kong.unirest.UnirestConfigException;
+
 import org.apache.logging.log4j.*;
 
 public class HttpManager implements IAPIService {
@@ -12,7 +14,7 @@ public class HttpManager implements IAPIService {
     private static Logger logger = LogManager.getLogger(HttpManager.class);
     private static final String FORMAT = "%s/%s";
 
-    public HttpManager(){
+    public HttpManager() {
         try {
             Unirest.config()
                     .setDefaultHeader("Accept", "application/json")
@@ -48,7 +50,7 @@ public class HttpManager implements IAPIService {
         return new Response(responseString.getStatus(), responseString.getBody());
     }
 
-    public String endpointFormat(String endpoint){
+    public String endpointFormat(String endpoint) {
         return String.format(FORMAT, URL, endpoint);
     }
 }

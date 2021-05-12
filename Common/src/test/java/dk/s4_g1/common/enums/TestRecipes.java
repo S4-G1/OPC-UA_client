@@ -1,13 +1,15 @@
 package dk.s4_g1.common.enums;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
+
 import java.util.Optional;
 
 class TestRecipes {
 
     @Test
-    void testEnumsHasTheRightSpeed(){
+    void testEnumsHasTheRightSpeed() {
         assertEquals(600, Recipes.PILSNER.speedLimit);
         assertEquals(300, Recipes.WHEAT.speedLimit);
         assertEquals(150, Recipes.IPA.speedLimit);
@@ -17,7 +19,7 @@ class TestRecipes {
     }
 
     @Test
-    void testEnumsHasTheRightName(){
+    void testEnumsHasTheRightName() {
         assertEquals("PILSNER", Recipes.PILSNER.name());
         assertEquals("WHEAT", Recipes.WHEAT.name());
         assertEquals("IPA", Recipes.IPA.name());
@@ -25,8 +27,9 @@ class TestRecipes {
         assertEquals("ALE", Recipes.ALE.name());
         assertEquals("ALCOHOL_FREE", Recipes.ALCOHOL_FREE.name());
     }
+
     @Test
-    void testGetProduct(){
+    void testGetProduct() {
         assertEquals(Optional.empty(), Recipes.getProduct("pilsner111"), "it should be empty");
         assertEquals(Optional.of(Recipes.PILSNER), Recipes.getProduct("pilsner"));
         assertEquals(Optional.of(Recipes.PILSNER), Recipes.getProduct("PILSNER"));

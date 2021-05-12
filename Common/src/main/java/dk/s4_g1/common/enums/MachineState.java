@@ -3,7 +3,6 @@ package dk.s4_g1.common.enums;
 import java.util.Optional;
 
 public enum MachineState {
-
     DEACTIVATED(0),
     CLEARING(1),
     STOPPED(2),
@@ -30,7 +29,7 @@ public enum MachineState {
 
     public static Optional<MachineState> getStateFromValue(int id) {
         for (MachineState state : MachineState.values()) {
-            if (state.id == id){
+            if (state.id == id) {
                 return Optional.of(state);
             }
         }

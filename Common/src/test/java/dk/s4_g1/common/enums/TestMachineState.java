@@ -1,13 +1,15 @@
 package dk.s4_g1.common.enums;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
+
 import java.util.Optional;
 
 class TestMachineState {
 
     @Test
-    void testEnumsHasId(){
+    void testEnumsHasId() {
         assertEquals(0, MachineState.DEACTIVATED.id);
         assertEquals(1, MachineState.CLEARING.id);
         assertEquals(2, MachineState.STOPPED.id);
@@ -29,7 +31,7 @@ class TestMachineState {
     }
 
     @Test
-    void testGetStateFromValue(){
+    void testGetStateFromValue() {
         assertEquals(Optional.empty(), MachineState.getStateFromValue(12), "it should be empty");
         assertEquals(Optional.of(MachineState.DEACTIVATED), MachineState.getStateFromValue(0));
         assertEquals(Optional.of(MachineState.CLEARING), MachineState.getStateFromValue(1));

@@ -1,27 +1,29 @@
 package dk.s4_g1.config_service;
 
 import dk.s4_g1.common.services.IConfigService;
+
+import org.apache.logging.log4j.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
-import org.apache.logging.log4j.*;
 
 public class ConfigManager implements IConfigService {
 
     private static Logger logger = LogManager.getLogger(ConfigManager.class);
     private Map<String, String> keyset;
 
-
     public ConfigManager() {
-        keyset = new HashMap<>(Map.of(
-                   "API_URL", "https://api.bierproductie.nymann.dev",
-                   "BEER_URL", "opc.tcp://127.0.0.1:4840",
-                   "BEER_USER", "sdu",
-                   "BEER_PASSWORD", "1234"
-                   ));
+        keyset =
+                new HashMap<>(
+                        Map.of(
+                                "API_URL", "https://api.bierproductie.nymann.dev",
+                                "BEER_URL", "opc.tcp://127.0.0.1:4840",
+                                "BEER_USER", "sdu",
+                                "BEER_PASSWORD", "1234"));
         logger.info("ConfigManger Created");
     }
 
@@ -54,18 +56,18 @@ public class ConfigManager implements IConfigService {
     }
 
     private String variableByFile(String key) {
-        try (var reader = new Scanner(new File("config"))){
+        try (var reader = new Scanner(new File("config"))) {
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
-                if (!line.contains("=")){
+                if (!line.contains("=")) {
                     continue;
                 }
 
                 var linesplit = line.split("=");
                 var varialbe = linesplit[1].trim();
-                if (linesplit[0].trim().matches(key)){
+                if (linesplit[0].trim().matches(key)) {
                     if (varialbe.startsWith("\"")) {
-                        return varialbe.substring(1, varialbe.length()-1);
+                        return varialbe.substring(1, varialbe.length() - 1);
                     }
                     return varialbe;
                 }
@@ -75,5 +77,4 @@ public class ConfigManager implements IConfigService {
         }
         return null;
     }
-
 }

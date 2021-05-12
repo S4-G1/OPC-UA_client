@@ -1,17 +1,18 @@
 package dk.s4_g1.common.enums;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 class TestNodes {
 
     @Test
-    void testNameSpaceIndex(){
+    void testNameSpaceIndex() {
         assertEquals(6, Nodes.STATE.namespaceIndex);
     }
 
     @Test
-    void testCommandNode(){
+    void testCommandNode() {
         assertEquals("::Program:Cube.Command.MachSpeed", Nodes.NEXT_MACHINE_SPEED.node);
         assertEquals("::Program:Cube.Command.CntrlCmd", Nodes.NEXT_MACHINE_COMMAND.node);
         assertEquals("::Program:Cube.Command.Parameter[0].Value", Nodes.NEXT_BATCH_ID.node);
@@ -20,7 +21,7 @@ class TestNodes {
         assertEquals("::Program:Cube.Command.CmdChangeRequest", Nodes.EXECUTE_MACHINE_CMD.node);
     }
 
-    void testStatusNode(){
+    void testStatusNode() {
         assertEquals("::Program:Cube.Admin.ProdProcessedCount", Nodes.PRODUCED_PRODUCTS.node);
         assertEquals("::Program:Cube.Admin.ProdDefectiveCount", Nodes.DEFECTIVE_PRODUCTS.node);
         assertEquals("::Program:Cube.Admin.StopReason.ID", Nodes.STOP_REASON_ID.node);
