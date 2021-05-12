@@ -19,15 +19,14 @@ public class CommandManager implements ICommandService{
 
     private OpcUaClient client;
     private static Logger logger = LogManager.getLogger();
-    private static final Marker IMPORTANT = MarkerManager.getMarker("IMPORTANT");
 
     public CommandManager() throws InterruptedException {
         //Create list of endpoints
         List<EndpointDescription> endpoints = null;
         try {
             endpoints =  DiscoveryClient.getEndpoints("opc.tcp://127.0.0.1:4840").get();
-        } catch(ExecutionException _e){
-            logger.error(IMPORTANT, "OpcUaClient can't connect");
+        } catch(ExecutionException e){
+            logger.error("OpcUaClient can't connect");
             Thread.currentThread().interrupt();
             return;
         }
@@ -40,14 +39,14 @@ public class CommandManager implements ICommandService{
         try {
             client = OpcUaClient.create(configBuilder.build());
         } catch(UaException e){
-            logger.error(IMPORTANT, "can't create a OpcUaClient: {}", e.toString());
+            logger.error("can't create a OpcUaClient: {}", e.getMessage());
             return;
         }
 
         try {
             client.connect().get();
         } catch(ExecutionException e){
-            logger.error(IMPORTANT, "OpcUaClient can't connect: {}", e.getMessage());
+            logger.error("OpcUaClient can't connect: {}", e.getMessage());
             Thread.currentThread().interrupt();
         }
     }
@@ -75,8 +74,8 @@ public class CommandManager implements ICommandService{
         var dataValue = DataValue.valueOnly(variant);
         try{
             client.writeValue(createNodeId(node), dataValue).get();
-        } catch(InterruptedException | ExecutionException _e){
-            logger.warn(IMPORTANT, "Can't write value");
+        } catch(InterruptedException | ExecutionException e){
+            logger.warn("Can't write value");
             Thread.currentThread().interrupt();
             return false;
         }

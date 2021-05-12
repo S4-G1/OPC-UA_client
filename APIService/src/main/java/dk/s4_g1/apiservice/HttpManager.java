@@ -21,7 +21,7 @@ public class HttpManager implements IAPIService {
                     .followRedirects(true)
                     .enableCookieManagement(false);
         } catch (UnirestConfigException e) {
-            logger.warn(API, "Unirest is already configured, skipping: {}", e);
+            logger.warn(API, "Unirest is already configured, skipping");
         }
     }
 

@@ -53,7 +53,7 @@ public class ConfigManager implements IConfigService {
     }
 
     private String variableByFile(String key) {
-        try (Scanner reader = new Scanner(new File("config"))){
+        try (var reader = new Scanner(new File("config"))){
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 var linesplit = line.split("=");
@@ -65,7 +65,7 @@ public class ConfigManager implements IConfigService {
                     return varialbe;
                 }
             }
-        } catch (FileNotFoundException _e) {
+        } catch (FileNotFoundException e) {
             logger.warn("Config file not founded");
         }
         return null;
