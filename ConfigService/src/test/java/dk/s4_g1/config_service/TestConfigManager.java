@@ -12,13 +12,13 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class ConfigManagerTest {
+class TestConfigManager {
     ConfigManager cm;
 
     private static Logger logger = LogManager.getLogger(ConfigManager.class);
     private static final Marker CONFIG = MarkerManager.getMarker("TEST--CONFIG--TEST");
 
-    ConfigManagerTest(){
+    TestConfigManager(){
         cm = new ConfigManager();
     }
 

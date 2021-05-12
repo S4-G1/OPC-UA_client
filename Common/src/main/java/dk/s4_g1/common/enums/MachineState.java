@@ -4,29 +4,27 @@ import java.util.Optional;
 
 public enum MachineState {
 
-    DEACTIVATED("Deactivated", 0),
-    CLEARING("Clearing", 1),
-    STOPPED("Stopped", 2),
-    STARTING("Starting", 3),
-    IDLE("Idle", 4),
-    SUSPENDED("Suspended", 5),
-    EXECUTE("Execute", 6),
-    STOPPING("Stopping", 7),
-    ABORTING("Aborting", 8),
-    ABORTED("Aborted", 9),
-    HOLDING("Holding", 10),
-    HELD("Held", 11),
-    RESETTING("Resetting", 15),
-    COMPLETING("Completing", 16),
-    COMPLETE("Complete", 17),
-    DEACTIVATING("Deactivating", 18),
-    ACTIVATING("Activating", 19);
+    DEACTIVATED(0),
+    CLEARING(1),
+    STOPPED(2),
+    STARTING(3),
+    IDLE(4),
+    SUSPENDED(5),
+    EXECUTE(6),
+    STOPPING(7),
+    ABORTING(8),
+    ABORTED(9),
+    HOLDING(10),
+    HELD(11),
+    RESETTING(15),
+    COMPLETING(16),
+    COMPLETE(17),
+    DEACTIVATING(18),
+    ACTIVATING(19);
 
-    public final String cmd;
     public final int id;
 
-    private MachineState(String cmd, int id) {
-        this.cmd = cmd;
+    private MachineState(int id) {
         this.id = id;
     }
 
