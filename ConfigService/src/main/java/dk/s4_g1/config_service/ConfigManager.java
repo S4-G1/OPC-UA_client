@@ -24,7 +24,7 @@ public class ConfigManager implements IConfigService {
                                 "BEER_URL", "opc.tcp://127.0.0.1:4840",
                                 "BEER_USER", "sdu",
                                 "BEER_PASSWORD", "1234"));
-        logger.info("ConfigManger Created");
+        logger.info("IConfigService - ConfigManger Created");
     }
 
     @Override

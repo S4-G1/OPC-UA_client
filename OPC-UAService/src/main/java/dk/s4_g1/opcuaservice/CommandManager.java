@@ -1,7 +1,7 @@
 package dk.s4_g1.opcuaservice;
 
 import dk.s4_g1.common.enums.Nodes;
-import dk.s4_g1.common.services.ICommandService;
+import dk.s4_g1.common.services.*;
 
 import org.apache.logging.log4j.*;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
@@ -19,12 +19,15 @@ public class CommandManager implements ICommandService {
 
     private OpcUaClient client;
     private static Logger logger = LogManager.getLogger();
+    private static IConfigService configLoader;
 
     public CommandManager() throws InterruptedException {
+        configLoader = java.util.ServiceLoader.load(IConfigService.class).findFirst().get();
         // Create list of endpoints
         List<EndpointDescription> endpoints = null;
         try {
-            endpoints = DiscoveryClient.getEndpoints("opc.tcp://127.0.0.1:4840").get();
+            endpoints =
+                    DiscoveryClient.getEndpoints(configLoader.getConfig("BEER_URL").get()).get();
         } catch (ExecutionException e) {
             logger.error("OpcUaClient can't connect");
             Thread.currentThread().interrupt();
@@ -51,6 +54,8 @@ public class CommandManager implements ICommandService {
             logger.error("OpcUaClient can't connect: {}", e.getMessage());
             Thread.currentThread().interrupt();
         }
+
+        logger.info("ICommandService - CommandManager Creadted");
     }
 
     @Override
