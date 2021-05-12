@@ -11,69 +11,68 @@ import org.apache.logging.log4j.*;
 
 public class ConfigManager implements IConfigService {
 
-    private static Logger logger = LogManager.getLogger(ConfigManager.class);
-    private Map<String, String> keyset;
+  private static Logger logger = LogManager.getLogger(ConfigManager.class);
+  private Map<String, String> keyset;
 
+  public ConfigManager() {
+    keyset =
+        new HashMap<>(
+            Map.of(
+                "API_URL", "https://api.bierproductie.nymann.dev",
+                "BEER_URL", "opc.tcp://127.0.0.1:4840",
+                "BEER_USER", "sdu",
+                "BEER_PASSWORD", "1234"));
+    logger.info("ConfigManger Created");
+  }
 
-    public ConfigManager() {
-        keyset = new HashMap<>(Map.of(
-                   "API_URL", "https://api.bierproductie.nymann.dev",
-                   "BEER_URL", "opc.tcp://127.0.0.1:4840",
-                   "BEER_USER", "sdu",
-                   "BEER_PASSWORD", "1234"
-                   ));
-        logger.info("ConfigManger Created");
+  @Override
+  public Optional<String> getConfig(String key) {
+    String variable = getEnv(key);
+    if (variable != null) {
+      logger.info("Loaded key: {} from enviromt variable. Key is: {}", key, variable);
+      return Optional.of(variable);
     }
 
-    @Override
-    public Optional<String> getConfig(String key) {
-        String variable = getEnv(key);
-        if (variable != null) {
-            logger.info("Loaded key: {} from enviromt variable. Key is: {}", key, variable);
-            return Optional.of(variable);
-        }
-
-        variable = variableByFile(key);
-        if (variable != null) {
-            logger.info("Loaded key: {} from file. Key is: {}", key, variable);
-            return Optional.of(variable);
-        }
-
-        variable = keyset.get(key);
-        if (variable != null) {
-            logger.info("Loaded key: {} from ConfigManager. Key is: {}", key, variable);
-            return Optional.of(variable);
-        }
-
-        logger.error("Tried to load key: {}, Does not exites", key);
-        return Optional.empty();
+    variable = variableByFile(key);
+    if (variable != null) {
+      logger.info("Loaded key: {} from file. Key is: {}", key, variable);
+      return Optional.of(variable);
     }
 
-    protected String getEnv(String key) {
-        return System.getenv(key);
+    variable = keyset.get(key);
+    if (variable != null) {
+      logger.info("Loaded key: {} from ConfigManager. Key is: {}", key, variable);
+      return Optional.of(variable);
     }
 
-    private String variableByFile(String key) {
-        try (var reader = new Scanner(new File("config"))){
-            while (reader.hasNextLine()) {
-                String line = reader.nextLine();
-                if (!line.contains("=")){
-                    continue;
-                }
+    logger.error("Tried to load key: {}, Does not exites", key);
+    return Optional.empty();
+  }
 
-                var linesplit = line.split("=");
-                var varialbe = linesplit[1].trim();
-                if (linesplit[0].trim().matches(key)){
-                    if (varialbe.startsWith("\"")) {
-                        return varialbe.substring(1, varialbe.length()-1);
-                    }
-                    return varialbe;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            logger.warn("Config file not founded");
+  protected String getEnv(String key) {
+    return System.getenv(key);
+  }
+
+  private String variableByFile(String key) {
+    try (var reader = new Scanner(new File("config"))) {
+      while (reader.hasNextLine()) {
+        String line = reader.nextLine();
+        if (!line.contains("=")) {
+          continue;
         }
-        return null;
-    }
 
+        var linesplit = line.split("=");
+        var varialbe = linesplit[1].trim();
+        if (linesplit[0].trim().matches(key)) {
+          if (varialbe.startsWith("\"")) {
+            return varialbe.substring(1, varialbe.length() - 1);
+          }
+          return varialbe;
+        }
+      }
+    } catch (FileNotFoundException e) {
+      logger.warn("Config file not founded");
+    }
+    return null;
+  }
 }
