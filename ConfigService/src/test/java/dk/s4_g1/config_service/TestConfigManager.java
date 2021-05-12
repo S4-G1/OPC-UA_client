@@ -69,11 +69,13 @@ class TestConfigManager {
             File config = new File("config");
             if (config.createNewFile()) {
                 PrintWriter writer = new PrintWriter("config", "UTF-8");
+                writer.println("this is a test!!!");
                 writer.println("API_URL=https://api.bierproductie.nymann.dev/2");
                 writer.println("BEER_URL=opc.tcp://127.0.0.1:4840");
                 writer.println("BEER_PASSWORD=1234");
                 writer.println(" BEER_USER =   \"sdu\"   ");
                 writer.println("   BEER_USER21312912  = Nice  ");
+                writer.println("this is a test!!!");
                 writer.close();
             }
         } catch (IOException e) {

@@ -55,6 +55,10 @@ public class ConfigManager implements IConfigService {
         try (var reader = new Scanner(new File("config"))){
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
+                if (!line.contains("=")){
+                    continue;
+                }
+
                 var linesplit = line.split("=");
                 var varialbe = linesplit[1].trim();
                 if (linesplit[0].trim().matches(key)){
