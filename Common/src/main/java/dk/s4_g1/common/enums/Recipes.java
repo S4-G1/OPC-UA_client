@@ -3,7 +3,6 @@ package dk.s4_g1.common.enums;
 import java.util.Optional;
 
 public enum Recipes {
-
     PILSNER(600),
     WHEAT(300),
     IPA(150),
