@@ -1,18 +1,20 @@
 package dk.s4_g1.apiservice;
 
 import dk.s4_g1.common.data.Response;
-import dk.s4_g1.common.services.IAPIService;
+import dk.s4_g1.common.services.*;
+
 import kong.unirest.Unirest;
 import kong.unirest.UnirestConfigException;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.*;
 
 public class HttpManager implements IAPIService {
 
-    private static final String URL = "https://api.bierproductie.nymann.dev";
-    private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String FORMAT = "%s/%s";
+    private static Logger logger = LogManager.getLogger(HttpManager.class);
+    private String url;
 
-    public HttpManager(){
+    public HttpManager() {
         try {
             Unirest.config()
                     .setDefaultHeader("Accept", "application/json")
@@ -20,8 +22,21 @@ public class HttpManager implements IAPIService {
                     .followRedirects(true)
                     .enableCookieManagement(false);
         } catch (UnirestConfigException e) {
-            LOGGER.warning("Unirest is already configured, skipping");
+            logger.warn("Unirest is already configured, skipping");
         }
+
+        var optionalConfigLoader = java.util.ServiceLoader.load(IConfigService.class).findFirst();
+        if (optionalConfigLoader.isPresent()) {
+            url =
+                    optionalConfigLoader
+                            .get()
+                            .getConfig("API_URL")
+                            .orElse("https://api.bierproductie.nymann.dev");
+        } else {
+            url = "https://api.bierproductie.nymann.dev";
+        }
+
+        logger.info("IAPIService - HttpManger Created");
     }
 
     @Override
@@ -48,7 +63,7 @@ public class HttpManager implements IAPIService {
         return new Response(responseString.getStatus(), responseString.getBody());
     }
 
-    public String endpointFormat(String endpoint){
-        return String.format(FORMAT, URL, endpoint);
+    protected String endpointFormat(String endpoint) {
+        return String.format(FORMAT, url, endpoint);
     }
 }

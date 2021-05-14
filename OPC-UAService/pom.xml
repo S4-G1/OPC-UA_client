@@ -8,7 +8,13 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>APIService</artifactId>
+    <artifactId>OPC-UAService</artifactId>
+
+    <properties>
+        <sonar.exclusions>
+            **/opcuaservice/CommandManager.java
+        </sonar.exclusions>
+    </properties>
 
     <!-- Dependencies! -->
     <dependencies>
@@ -19,15 +25,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>dk.s4_g1</groupId>
-            <artifactId>ConfigService</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.konghq</groupId>
-            <artifactId>unirest-java</artifactId>
-            <version>3.7.02</version>
+            <groupId>org.eclipse.milo</groupId>
+            <artifactId>sdk-client</artifactId>
+            <version>0.6.1</version>
         </dependency>
     </dependencies>
 

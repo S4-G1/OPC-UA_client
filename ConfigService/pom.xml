@@ -8,19 +8,13 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>APIService</artifactId>
+    <artifactId>ConfigService</artifactId>
 
     <!-- Dependencies! -->
     <dependencies>
         <dependency>
             <groupId>dk.s4_g1</groupId>
             <artifactId>Common</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>dk.s4_g1</groupId>
-            <artifactId>ConfigService</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
