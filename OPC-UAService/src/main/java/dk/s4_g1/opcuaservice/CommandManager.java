@@ -35,6 +35,7 @@ public class CommandManager implements ICommandService {
         } else {
             url = "https://api.bierproductie.nymann.dev";
         }
+
         List<EndpointDescription> endpoints = null;
         try {
             endpoints = DiscoveryClient.getEndpoints(url).get();

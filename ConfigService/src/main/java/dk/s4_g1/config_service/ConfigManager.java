@@ -64,12 +64,12 @@ public class ConfigManager implements IConfigService {
                 }
 
                 var linesplit = line.split("=");
-                var varialbe = linesplit[1].trim();
+                var variable = linesplit[1].trim();
                 if (linesplit[0].trim().matches(key)) {
-                    if (varialbe.startsWith("\"")) {
-                        return varialbe.substring(1, varialbe.length() - 1);
+                    if (variable.startsWith("\"")) {
+                        return variable.substring(1, variable.length() - 1);
                     }
-                    return varialbe;
+                    return variable;
                 }
             }
         } catch (FileNotFoundException e) {
