@@ -12,29 +12,29 @@ class TestHttpManager {
     HttpManager manager = new HttpManager();
     private String endpoint = "inventory_statuses";
 
-    // @Test
-    // void post() {
-    //     // Mock HttpManager Object
-    //     HttpManager mockManager = mock(HttpManager.class);
+    @Test
+    void post() {
+        // Mock HttpManager Object
+        HttpManager mockManager = mock(HttpManager.class);
 
-    //     // Create json String
-    //     String json =
-    //             """
-    //         {
-    //             "name": "Pilsner",
-    //             "max_value": 200,
-    //             "current_value": 69
-    //         }
-    //     """;
+        // Create json String
+        String json =
+                """
+            {
+                "name": "Pilsner",
+                "max_value": 200,
+                "current_value": 69
+            }
+        """;
 
-    //     // Setup rule that returns new Response when manager.post is called
-    //     when(mockManager.post(endpoint, json)).thenReturn(new Response(201, json));
+        // Setup rule that returns new Response when manager.post is called
+        when(mockManager.post(endpoint, json)).thenReturn(new Response(201, json));
 
-    //     Response r = mockManager.post(endpoint, json);
-    //     assertEquals(201, r.statusCode);
-    //     assertEquals(json, r.body);
-    //     verify(mockManager).post(endpoint, json);
-    // }
+        Response r = mockManager.post(endpoint, json);
+        assertEquals(201, r.statusCode);
+        assertEquals(json, r.body);
+        verify(mockManager).post(endpoint, json);
+    }
 
     @Test
     void getValidEndpoint() {
