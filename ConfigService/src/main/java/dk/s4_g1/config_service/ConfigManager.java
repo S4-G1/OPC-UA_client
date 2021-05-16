@@ -21,14 +21,13 @@ public class ConfigManager implements IConfigService {
                 new HashMap<>(
                         Map.of(
                                 "API_URL", "https://api.bierproductie.nymann.dev",
-                                "BEER_URL", "opc.tcp://127.0.0.1:4840",
-                                "BEER_USER", "sdu",
-                                "BEER_PASSWORD", "1234"));
+                                "BEER_URL", "opc.tcp://127.0.0.1:4840"));
         logger.info("IConfigService - ConfigManger Created");
     }
 
     @Override
     public Optional<String> getConfig(String key) {
+        logger.debug("Trying to find key: {}", key);
         String variable = getEnv(key);
         if (variable != null) {
             logger.info("Loaded key: {} from enviromt variable. Key is: {}", key, variable);
@@ -47,7 +46,7 @@ public class ConfigManager implements IConfigService {
             return Optional.of(variable);
         }
 
-        logger.error("Tried to load key: {}, Does not exites", key);
+        logger.error("Could not find key: {}", key);
         return Optional.empty();
     }
 
