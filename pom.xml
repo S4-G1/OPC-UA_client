@@ -21,9 +21,12 @@
 
     <modules>
         <module>Common</module>
+        <module>CommonOpcUa</module>
         <module>ConfigService</module>
         <module>APIService</module>
         <module>OPC-UAService</module>
+        <module>CommandService</module>
+        <module>SubscribeService</module>
         <module>Core</module>
     </modules>
 
@@ -63,28 +66,28 @@
                 <version>3.0.0-M5</version>
             </plugin>
 
-            <plugin>
-                <!-- Jacoco requires for sonar to get coverage of files -->
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
-                <executions>
-                    <execution>
-                        <id>coverage-initialize</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
+            <!-- <plugin> -->
+            <!--     <!-1- Jacoco requires for sonar to get coverage of files -1-> -->
+            <!--     <groupId>org.jacoco</groupId> -->
+            <!--     <artifactId>jacoco-maven-plugin</artifactId> -->
+            <!--     <version>0.8.7</version> -->
+            <!--     <executions> -->
+            <!--         <execution> -->
+            <!--             <id>coverage-initialize</id> -->
+            <!--             <goals> -->
+            <!--                 <goal>prepare-agent</goal> -->
+            <!--             </goals> -->
+            <!--         </execution> -->
 
-                    <execution>
-                        <id>coverage-report</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--         <execution> -->
+            <!--             <id>coverage-report</id> -->
+            <!--             <phase>post-integration-test</phase> -->
+            <!--             <goals> -->
+            <!--                 <goal>report</goal> -->
+            <!--             </goals> -->
+            <!--         </execution> -->
+            <!--     </executions> -->
+            <!-- </plugin> -->
         </plugins>
     </build>
 </project>

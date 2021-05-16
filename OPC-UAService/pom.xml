@@ -10,19 +10,23 @@
 
     <artifactId>OPC-UAService</artifactId>
 
-    <properties>
-        <sonar.exclusions>
-            **/opcuaservice/CommandManager.java
-        </sonar.exclusions>
-    </properties>
-
     <!-- Dependencies! -->
     <dependencies>
         <dependency>
             <groupId>dk.s4_g1</groupId>
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>CommonOpcUa</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>ConfigService</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.milo</groupId>

@@ -16,13 +16,12 @@
             <groupId>dk.s4_g1</groupId>
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>dk.s4_g1</groupId>
             <artifactId>ConfigService</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.konghq</groupId>

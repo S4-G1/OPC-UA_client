@@ -8,7 +8,7 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>ConfigService</artifactId>
+    <artifactId>CommonOpcUa</artifactId>
 
     <!-- Dependencies! -->
     <dependencies>
@@ -17,6 +17,10 @@
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.milo</groupId>
+            <artifactId>sdk-client</artifactId>
+            <version>0.6.1</version>
+        </dependency>
     </dependencies>
-
 </project>
