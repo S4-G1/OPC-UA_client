@@ -19,6 +19,16 @@ class TestRecipes {
     }
 
     @Test
+    void testEnumsHasNotChangedOrdre() {
+        assertEquals(0, Recipes.PILSNER.ordinal());
+        assertEquals(1, Recipes.WHEAT.ordinal());
+        assertEquals(2, Recipes.IPA.ordinal());
+        assertEquals(3, Recipes.STOUT.ordinal());
+        assertEquals(4, Recipes.ALE.ordinal());
+        assertEquals(5, Recipes.ALCOHOL_FREE.ordinal());
+    }
+
+    @Test
     void testEnumsHasTheRightName() {
         assertEquals("PILSNER", Recipes.PILSNER.name());
         assertEquals("WHEAT", Recipes.WHEAT.name());
