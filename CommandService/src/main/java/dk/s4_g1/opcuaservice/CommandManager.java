@@ -2,6 +2,7 @@ package dk.s4_g1.opcuaservice;
 
 import dk.s4_g1.common.enums.Nodes;
 import dk.s4_g1.common.services.*;
+import dk.s4_g1.common.util.ServiceLoader;
 import dk.s4_g1.commonOpcUa.NodeHelper;
 import dk.s4_g1.commonOpcUa.service.IOpcUaClientService;
 
@@ -9,6 +10,7 @@ import org.apache.logging.log4j.*;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.stack.core.types.builtin.*;
 
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class CommandManager implements ICommandService {
@@ -17,7 +19,7 @@ public class CommandManager implements ICommandService {
     private static Logger logger = LogManager.getLogger(CommandManager.class);
 
     public CommandManager() {
-        var OptionalClient = java.util.ServiceLoader.load(IOpcUaClientService.class).findFirst();
+        var OptionalClient = ServiceLoader.getDefault(IOpcUaClientService.class);
         if (OptionalClient.isEmpty()) {
             throw new RuntimeException(
                     "Can't create instance of CommandManager.class, because IOpcUaCLientService"

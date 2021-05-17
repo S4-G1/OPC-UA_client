@@ -56,7 +56,7 @@ public class ClientManager implements IOpcUaClientService {
         }
     }
 
-    protected OpcUaClientConfig getOpcUaClientConfig(
+    protected static OpcUaClientConfig getOpcUaClientConfig(
             IConfigService config, EndpointDescription endpoint) {
         var user = config.getConfig("BEER_USER");
 
