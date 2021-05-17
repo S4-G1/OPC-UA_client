@@ -39,7 +39,7 @@
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
+            <artifactId>mockito-inline</artifactId>
             <version>3.6.28</version>
             <scope>test</scope>
         </dependency>
@@ -66,28 +66,28 @@
                 <version>3.0.0-M5</version>
             </plugin>
 
-            <!-- <plugin> -->
-            <!--     <!-1- Jacoco requires for sonar to get coverage of files -1-> -->
-            <!--     <groupId>org.jacoco</groupId> -->
-            <!--     <artifactId>jacoco-maven-plugin</artifactId> -->
-            <!--     <version>0.8.7</version> -->
-            <!--     <executions> -->
-            <!--         <execution> -->
-            <!--             <id>coverage-initialize</id> -->
-            <!--             <goals> -->
-            <!--                 <goal>prepare-agent</goal> -->
-            <!--             </goals> -->
-            <!--         </execution> -->
+            <plugin>
+                <!-- Jacoco requires for sonar to get coverage of files -->
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <id>coverage-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
 
-            <!--         <execution> -->
-            <!--             <id>coverage-report</id> -->
-            <!--             <phase>post-integration-test</phase> -->
-            <!--             <goals> -->
-            <!--                 <goal>report</goal> -->
-            <!--             </goals> -->
-            <!--         </execution> -->
-            <!--     </executions> -->
-            <!-- </plugin> -->
+                    <execution>
+                        <id>coverage-report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
