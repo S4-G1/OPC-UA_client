@@ -1,7 +1,7 @@
 package dk.s4_g1.opcuaservice;
 
 import dk.s4_g1.common.services.*;
-import dk.s4_g1.commonOpcUa.service.IOpcUaClientService;
+import dk.s4_g1.common_opcua.service.IOpcUaClientService;
 
 import org.apache.logging.log4j.*;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;

@@ -5,7 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import dk.s4_g1.common.util.ServiceLoader;
-import dk.s4_g1.commonOpcUa.service.IOpcUaClientService;
+import dk.s4_g1.common_opcua.service.IOpcUaClientService;
 
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.stack.core.types.builtin.*;
@@ -13,14 +13,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 import java.util.Optional;
-import java.util.ServiceConfigurationError;
 
 class TestCommandManager {
 
     @Test
     void TestCanCreateCommandManager() {
         assertThrows(
-                ServiceConfigurationError.class,
+                RuntimeException.class,
                 () -> {
                     new CommandManager();
                 });
