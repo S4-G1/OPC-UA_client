@@ -1,7 +1,8 @@
 package dk.s4_g1.opcuaservice;
 
 import dk.s4_g1.common.services.*;
-import dk.s4_g1.common_opcua.service.IOpcUaClientService;
+import dk.s4_g1.common.util.*;
+import dk.s4_g1.common_opcua.services.IOpcUaClientService;
 
 import org.apache.logging.log4j.*;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
@@ -20,12 +21,12 @@ public class ClientManager implements IOpcUaClientService {
     private OpcUaClient client;
     private static Logger logger = LogManager.getLogger(ClientManager.class);
 
-    public ClientManager() {
-        var OptionalConfigLoader = java.util.ServiceLoader.load(IConfigService.class).findFirst();
-        if (OptionalConfigLoader.isEmpty()) {
-            throwRuntimeException("IconfigService can't be loaded");
+    public ClientManager() throws ServiceLoaderException {
+        var optionalConfigLoader = ServiceLoader.getDefault(IConfigService.class);
+        if (optionalConfigLoader.isEmpty()) {
+            throw new ServiceLoaderException("IconfigService can't be loaded");
         }
-        var config = OptionalConfigLoader.get();
+        var config = optionalConfigLoader.get();
 
         var opcUaClientConfig = getOpcUaClientConfig(config, getEndpoint(config));
 
@@ -35,7 +36,7 @@ public class ClientManager implements IOpcUaClientService {
         } catch (ExecutionException | UaException | InterruptedException e) {
             logger.error("OpcUaClient can't connect");
             Thread.currentThread().interrupt();
-            throwRuntimeException("OpcUaClient can't connect to the machine");
+            throw new ServiceLoaderException("OpcUaClient can't connect to the machine");
         }
 
         logger.info(
@@ -43,7 +44,7 @@ public class ClientManager implements IOpcUaClientService {
                 client.getConfig().getEndpoint().getEndpointUrl());
     }
 
-    protected EndpointDescription getEndpoint(IConfigService config) {
+    protected EndpointDescription getEndpoint(IConfigService config) throws ServiceLoaderException {
         var endpointUrl = config.getConfig("BEER_URL").orElse("opc.tcp://127.0.0.1:4840");
         logger.info("Trying to connect to endpoint: {}", endpointUrl);
         try {
@@ -51,8 +52,7 @@ public class ClientManager implements IOpcUaClientService {
         } catch (InterruptedException | ExecutionException e) {
             logger.error("OpcUaClient can't get a list of endpoints");
             Thread.currentThread().interrupt();
-            throwRuntimeException("OpcUaClient can't get a list of endpoints");
-            return null;
+            throw new ServiceLoaderException("OpcUaClient can't get a list of endpoints");
         }
     }
 
@@ -74,9 +74,5 @@ public class ClientManager implements IOpcUaClientService {
     @Override
     public OpcUaClient getClient() {
         return this.client;
-    }
-
-    protected void throwRuntimeException(String msg) throws RuntimeException {
-        throw new RuntimeException("Can't create instance of ClientManager.class, because " + msg);
     }
 }

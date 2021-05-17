@@ -5,7 +5,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import dk.s4_g1.common.util.ServiceLoader;
-import dk.s4_g1.common_opcua.service.IOpcUaClientService;
+import dk.s4_g1.common.util.ServiceLoaderException;
+import dk.s4_g1.common_opcua.services.IOpcUaClientService;
 
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.stack.core.types.builtin.*;
@@ -19,7 +20,7 @@ class TestCommandManager {
     @Test
     void TestCanCreateCommandManager() {
         assertThrows(
-                RuntimeException.class,
+                ServiceLoaderException.class,
                 () -> {
                     new CommandManager();
                 });
@@ -50,7 +51,7 @@ class TestCommandManager {
                     .thenReturn(Optional.empty());
 
             assertThrows(
-                    RuntimeException.class,
+                    ServiceLoaderException.class,
                     () -> {
                         new CommandManager();
                     });

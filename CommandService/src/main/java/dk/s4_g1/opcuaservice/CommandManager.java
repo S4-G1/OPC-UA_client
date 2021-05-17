@@ -2,15 +2,14 @@ package dk.s4_g1.opcuaservice;
 
 import dk.s4_g1.common.enums.Nodes;
 import dk.s4_g1.common.services.*;
-import dk.s4_g1.common.util.ServiceLoader;
+import dk.s4_g1.common.util.*;
 import dk.s4_g1.common_opcua.NodeHelper;
-import dk.s4_g1.common_opcua.service.IOpcUaClientService;
+import dk.s4_g1.common_opcua.services.IOpcUaClientService;
 
 import org.apache.logging.log4j.*;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.stack.core.types.builtin.*;
 
-import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class CommandManager implements ICommandService {
@@ -18,14 +17,14 @@ public class CommandManager implements ICommandService {
     private OpcUaClient client;
     private static Logger logger = LogManager.getLogger(CommandManager.class);
 
-    public CommandManager() {
-        var OptionalClient = ServiceLoader.getDefault(IOpcUaClientService.class);
-        if (OptionalClient.isEmpty()) {
-            throw new RuntimeException(
+    public CommandManager() throws ServiceLoaderException {
+        var optionalClient = ServiceLoader.getDefault(IOpcUaClientService.class);
+        if (optionalClient.isEmpty()) {
+            throw new ServiceLoaderException(
                     "Can't create instance of CommandManager.class, because IOpcUaCLientService"
                             + " can't be loaded");
         }
-        this.client = OptionalClient.get().getClient();
+        this.client = optionalClient.get().getClient();
 
         logger.info("ICommandService - CommandManager Creadted");
     }

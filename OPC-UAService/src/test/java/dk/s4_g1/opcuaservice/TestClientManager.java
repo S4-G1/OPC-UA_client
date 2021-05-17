@@ -3,6 +3,7 @@ package dk.s4_g1.opcuaservice;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import dk.s4_g1.common.util.ServiceLoaderException;
 import dk.s4_g1.config_service.ConfigManager;
 
 import org.eclipse.milo.opcua.sdk.client.api.config.OpcUaClientConfigBuilder;
@@ -17,7 +18,7 @@ class TestClientManager {
     @Test
     void CreateConfigMangerWithJavaServiceLoader() {
         assertThrows(
-                RuntimeException.class,
+                ServiceLoaderException.class,
                 () -> {
                     new ClientManager();
                 });
