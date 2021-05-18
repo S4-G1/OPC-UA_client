@@ -2,6 +2,7 @@ package dk.s4_g1.opcuaservice;
 
 import dk.s4_g1.common.enums.Nodes;
 import dk.s4_g1.common.services.*;
+import dk.s4_g1.common.util.*;
 import dk.s4_g1.common_opcua.NodeHelper;
 import dk.s4_g1.common_opcua.services.IOpcUaClientService;
 
@@ -19,8 +20,8 @@ public class SubscribtionManager implements ISubscriptionService {
 
     public SubscribtionManager() throws UaException {
         subs = new HashMap<>();
-        var OptionalClient = java.util.ServiceLoader.load(IOpcUaClientService.class).findFirst();
-        if (OptionalClient.isEmpty()) {
+        var optionalClient = ServiceLoader.getDefault(IOpcUaClientService.class);
+        if (optionalClient.isEmpty()) {
             throw new RuntimeException(
                     "Can't create instance of SubscribtionManager.class, because"
                             + " IOpcUaCLientService can't be loaded");
@@ -28,7 +29,7 @@ public class SubscribtionManager implements ISubscriptionService {
 
         // Throws UaException bad code. I hate Exceptions... need better error
         // handling. Handling exceptions not pretty.
-        subscriptions = ManagedSubscription.create(OptionalClient.get().getClient());
+        subscriptions = ManagedSubscription.create(optionalClient.get().getClient());
         subscriptions.addDataChangeListener(
                 (items, values) -> {
                     for (int i = 0; i < items.size(); i++) {
@@ -43,25 +44,25 @@ public class SubscribtionManager implements ISubscriptionService {
     }
 
     @Override
-    public ISubscription subscribe(Nodes node) {
+    public boolean subscribe(Nodes node, ICallbackSubscription callback) {
         ManagedDataItem dataItem = null;
         try {
             dataItem = subscriptions.createDataItem(NodeHelper.createNodeId(node));
         } catch (UaException e) {
             logger.error("Could not create subscription on node: {}", node);
-            return null;
+            return false;
         }
 
         if (dataItem.getStatusCode().isGood()) {
             logger.info("item created for nodeId={}", dataItem.getNodeId());
             subs.put(node, dataItem);
-            return null;
+            return true;
         }
         logger.warn(
                 "failed to create item for nodeId={} (status={})",
                 dataItem.getNodeId(),
                 dataItem.getStatusCode());
-        return null;
+        return false;
     }
 
     @Override
