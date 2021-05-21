@@ -30,13 +30,15 @@ public class Main {
         ICallbackSubscription callback =
                 ServiceLoader.getDefault(ICallbackSubscription.class).get();
 
-        submanager.subscribe(Nodes.PRODUCED_PRODUCTS, callback);
-        submanager.subscribe(Nodes.STATUS_MAINTENANCE, callback);
-        submanager.subscribe(Nodes.STATUS_BARLEY, callback);
-        submanager.subscribe(Nodes.STATUS_MALT, callback);
-        submanager.subscribe(Nodes.STATUS_WHEAT, callback);
-        submanager.subscribe(Nodes.STATUS_YEAST, callback);
-        submanager.subscribe(Nodes.STATUS_HOPS, callback);
+        submanager.addCallback(callback);
+
+        submanager.subscribe(Nodes.PRODUCED_PRODUCTS);
+        submanager.subscribe(Nodes.STATUS_MAINTENANCE);
+        submanager.subscribe(Nodes.STATUS_BARLEY);
+        submanager.subscribe(Nodes.STATUS_MALT);
+        submanager.subscribe(Nodes.STATUS_WHEAT);
+        submanager.subscribe(Nodes.STATUS_YEAST);
+        submanager.subscribe(Nodes.STATUS_HOPS);
 
         new Scanner(System.in).next();
         System.out.println("------------------------- Removing MAINTENACE, BARLY, MALT!");

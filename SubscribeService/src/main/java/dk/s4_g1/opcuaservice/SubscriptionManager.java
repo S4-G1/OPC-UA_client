@@ -35,19 +35,7 @@ public class SubscriptionManager implements ISubscriptionService {
     }
 
     @Override
-    public boolean subscribe(Nodes node, ICallbackSubscription callback) {
-        subscriptions.addDataChangeListener(
-                (items, values) -> {
-                    for (int i = 0; i < items.size(); i++) {
-                        logger.info(
-                                "subscription value received: item={}, value={}",
-                                items.get(i).getNodeId().getIdentifier().toString(),
-                                values.get(i).getValue().getValue().toString());
-                        Nodes n = Nodes.getNodeFromString(items.get(i).getNodeId().getIdentifier().toString());
-                        callback.sendMsg(n, values.get(i).getValue().getValue().toString());
-                    }
-                });
-
+    public boolean subscribe(Nodes node) {
         ManagedDataItem dataItem = null;
         try {
             dataItem = subscriptions.createDataItem(NodeHelper.createNodeId(node));
@@ -98,5 +86,20 @@ public class SubscriptionManager implements ISubscriptionService {
                     }
                 });
         return true;
+    }
+
+    @Override
+    public void addCallback(ICallbackSubscription callback){
+        subscriptions.addDataChangeListener(
+                (items, values) -> {
+                    for (int i = 0; i < items.size(); i++) {
+                        logger.info(
+                                "subscription value received: item={}, value={}",
+                                items.get(i).getNodeId().getIdentifier().toString(),
+                                values.get(i).getValue().getValue().toString());
+                        Nodes n = Nodes.getNodeFromString(items.get(i).getNodeId().getIdentifier().toString());
+                        callback.sendMsg(n, values.get(i).getValue().getValue().toString());
+                    }
+                });
     }
 }
