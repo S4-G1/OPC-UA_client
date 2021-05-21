@@ -41,10 +41,10 @@ public class SubscriptionManager implements ISubscriptionService {
                     for (int i = 0; i < items.size(); i++) {
                         logger.info(
                                 "subscription value received: item={}, value={}",
-                                items.get(i).getNodeId().toString(),
-                                values.get(i).getValue().toString());
-                        Nodes n = Nodes.getNodeFromString(items.get(i).getNodeId().toString());
-                        callback.sendMsg(n, values.get(i).getValue().toString());
+                                items.get(i).getNodeId().getIdentifier().toString(),
+                                values.get(i).getValue().getValue().toString());
+                        Nodes n = Nodes.getNodeFromString(items.get(i).getNodeId().getIdentifier().toString());
+                        callback.sendMsg(n, values.get(i).getValue().getValue().toString());
                     }
                 });
 

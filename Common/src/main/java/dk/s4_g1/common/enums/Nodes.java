@@ -41,7 +41,7 @@ public enum Nodes {
 
     public static Nodes getNodeFromString(String s){
         for(Nodes n : Nodes.values()){
-            if(n.node.contains(s)){
+            if(n.node.equals(s)){
                 return n;
             }
         }
