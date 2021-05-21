@@ -28,7 +28,9 @@ public enum Nodes {
     STATUS_MAINTENANCE("::Program:Maintenance.Counter"),
     STATUS_HUMIDITY("::Program:Cube.Status.Parameter[2].Value"),
     STATUS_TEMPERATURE("::Program:Cube.Status.Parameter[3].Value"),
-    STATUS_VIBRATION("::Program:Cube.Status.Parameter[4].Value");
+    STATUS_VIBRATION("::Program:Cube.Status.Parameter[4].Value"),
+
+    INVALID("InvalidNode");
 
     public final String node;
     public final int namespaceIndex = 6;
@@ -44,6 +46,6 @@ public enum Nodes {
             }
         }
 
-        return null;
+        return INVALID;
     }
 }

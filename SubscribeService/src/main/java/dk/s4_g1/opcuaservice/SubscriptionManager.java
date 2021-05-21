@@ -15,10 +15,10 @@ import java.util.HashMap;
 
 public class SubscriptionManager implements ISubscriptionService {
     private ManagedSubscription subscriptions;
-    private static Logger logger = LogManager.getLogger(SubscribtionManager.class);
+    private static Logger logger = LogManager.getLogger(SubscriptionManager.class);
     private HashMap<Nodes, ManagedDataItem> subs;
 
-    public SubscribtionManager() throws UaException {
+    public SubscriptionManager() throws UaException {
         subs = new HashMap<>();
         var optionalClient = ServiceLoader.getDefault(IOpcUaClientService.class);
         if (optionalClient.isEmpty()) {
@@ -41,9 +41,10 @@ public class SubscriptionManager implements ISubscriptionService {
                     for (int i = 0; i < items.size(); i++) {
                         logger.info(
                                 "subscription value received: item={}, value={}",
-                                items.get(i).getNodeId(),
-                                values.get(i).getValue());
-                        
+                                items.get(i).getNodeId().toString(),
+                                values.get(i).getValue().toString());
+                        Nodes n = Nodes.getNodeFromString(items.get(i).getNodeId().toString());
+                        callback.sendMsg(n, values.get(i).getValue().toString());
                     }
                 });
         
