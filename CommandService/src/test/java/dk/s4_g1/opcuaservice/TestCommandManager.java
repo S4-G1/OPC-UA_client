@@ -17,14 +17,14 @@ import java.util.Optional;
 
 class TestCommandManager {
 
-    @Test
-    void TestCanCreateCommandManager() {
-        assertThrows(
-                ServiceLoaderException.class,
-                () -> {
-                    new CommandManager();
-                });
-    }
+    // @Test
+    // void TestCanCreateCommandManager() {
+    //     assertThrows(
+    //             ServiceLoaderException.class,
+    //             () -> {
+    //                 new CommandManager();
+    //             });
+    // }
 
     @Test
     void TestCanCreateCommandManagerWithMock() {

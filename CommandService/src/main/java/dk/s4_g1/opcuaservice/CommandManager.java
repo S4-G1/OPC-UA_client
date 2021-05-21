@@ -20,6 +20,7 @@ public class CommandManager implements ICommandService {
     public CommandManager() throws ServiceLoaderException {
         var optionalClient = ServiceLoader.getDefault(IOpcUaClientService.class);
         if (optionalClient.isEmpty()) {
+            logger.error("Cant load this class");
             throw new ServiceLoaderException(
                     "Can't create instance of CommandManager.class, because IOpcUaCLientService"
                             + " can't be loaded");

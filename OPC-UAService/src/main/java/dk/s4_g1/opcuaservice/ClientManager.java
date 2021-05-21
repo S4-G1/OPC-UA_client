@@ -24,6 +24,7 @@ public class ClientManager implements IOpcUaClientService {
     public ClientManager() throws ServiceLoaderException {
         var optionalConfigLoader = ServiceLoader.getDefault(IConfigService.class);
         if (optionalConfigLoader.isEmpty()) {
+            logger.error("Can't loaded Configloader");
             throw new ServiceLoaderException("IconfigService can't be loaded");
         }
         var config = optionalConfigLoader.get();

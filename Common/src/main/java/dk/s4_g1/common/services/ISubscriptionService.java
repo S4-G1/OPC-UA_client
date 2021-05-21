@@ -7,4 +7,6 @@ public interface ISubscriptionService {
     public boolean subscribe(Nodes node, ICallbackSubscription callback);
 
     public boolean stopSubscription(Nodes node);
+
+    public boolean stopAllSubscription();
 }

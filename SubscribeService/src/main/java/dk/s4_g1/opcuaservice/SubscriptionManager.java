@@ -47,7 +47,7 @@ public class SubscriptionManager implements ISubscriptionService {
                         callback.sendMsg(n, values.get(i).getValue().toString());
                     }
                 });
-        
+
         ManagedDataItem dataItem = null;
         try {
             dataItem = subscriptions.createDataItem(NodeHelper.createNodeId(node));
@@ -85,6 +85,7 @@ public class SubscriptionManager implements ISubscriptionService {
         return false;
     }
 
+    @Override
     public boolean stopAllSubscription() {
         subs.forEach(
                 (node, subscription) -> {
