@@ -13,7 +13,7 @@ import org.eclipse.milo.opcua.stack.core.UaException;
 
 import java.util.HashMap;
 
-public class SubscribtionManager implements ISubscriptionService {
+public class SubscriptionManager implements ISubscriptionService {
     private ManagedSubscription subscriptions;
     private static Logger logger = LogManager.getLogger(SubscribtionManager.class);
     private HashMap<Nodes, ManagedDataItem> subs;
@@ -30,6 +30,12 @@ public class SubscribtionManager implements ISubscriptionService {
         // Throws UaException bad code. I hate Exceptions... need better error
         // handling. Handling exceptions not pretty.
         subscriptions = ManagedSubscription.create(optionalClient.get().getClient());
+
+        logger.info("ISubscriptionService - SubscribtionManager Creadted");
+    }
+
+    @Override
+    public boolean subscribe(Nodes node, ICallbackSubscription callback) {
         subscriptions.addDataChangeListener(
                 (items, values) -> {
                     for (int i = 0; i < items.size(); i++) {
@@ -37,14 +43,10 @@ public class SubscribtionManager implements ISubscriptionService {
                                 "subscription value received: item={}, value={}",
                                 items.get(i).getNodeId(),
                                 values.get(i).getValue());
+                        
                     }
                 });
-
-        logger.info("ISubscriptionService - SubscribtionManager Creadted");
-    }
-
-    @Override
-    public boolean subscribe(Nodes node, ICallbackSubscription callback) {
+        
         ManagedDataItem dataItem = null;
         try {
             dataItem = subscriptions.createDataItem(NodeHelper.createNodeId(node));
