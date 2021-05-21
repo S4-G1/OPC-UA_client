@@ -32,7 +32,7 @@ class TestNodes {
         assertEquals("::Program:Cube.Status.MachSpeed", Nodes.SPEED.node);
         assertEquals("::Program:Cube.Status.CurMachSpeed", Nodes.NORMALIZED_SPEED.node);
         assertEquals("::Program:Cube.Status.Parameter[0].Value", Nodes.BATCH_ID.node);
-        assertEquals("::Program:Cube.Status.Parameter[1].Value", Nodes.PRODUCT_TO_AMOUNT.node);
+        assertEquals("::Program:Cube.Status.Parameter[1].Value", Nodes.AMOUNT_TO_PRODUCE.node);
 
         assertEquals("::Program:Inventory.Barley", Nodes.STATUS_BARLEY.node);
         assertEquals("::Program:Inventory.Malt", Nodes.STATUS_MALT.node);

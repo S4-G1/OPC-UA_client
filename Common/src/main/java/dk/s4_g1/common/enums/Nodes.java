@@ -18,7 +18,7 @@ public enum Nodes {
     SPEED("::Program:Cube.Status.MachSpeed"),
     NORMALIZED_SPEED("::Program:Cube.Status.CurMachSpeed"),
     BATCH_ID("::Program:Cube.Status.Parameter[0].Value"),
-    PRODUCT_TO_AMOUNT("::Program:Cube.Status.Parameter[1].Value"),
+    AMOUNT_TO_PRODUCE("::Program:Cube.Status.Parameter[1].Value"),
 
     STATUS_BARLEY("::Program:Inventory.Barley"),
     STATUS_MALT("::Program:Inventory.Malt"),
