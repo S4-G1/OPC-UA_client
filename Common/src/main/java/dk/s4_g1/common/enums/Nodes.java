@@ -36,4 +36,14 @@ public enum Nodes {
     private Nodes(String node) {
         this.node = node;
     }
+
+    public static Nodes getNodeFromString(String s){
+        for(Nodes n : Nodes.values()){
+            if(n.node.contains(s)){
+                return n;
+            }
+        }
+
+        return null;
+    }
 }
