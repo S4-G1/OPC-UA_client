@@ -14,6 +14,7 @@ public class APISubscriptionCallback implements ICallbackSubscription{
     private static Logger logger = LogManager.getLogger(APISubscriptionCallback.class);
 
     private DataOverTime curBatch;
+    private String timestamp = "";
 
     public APISubscriptionCallback(){
         var oAPIService = ServiceLoader.getDefault(IAPIService.class);
@@ -24,7 +25,7 @@ public class APISubscriptionCallback implements ICallbackSubscription{
     }
 
     @Override
-    public void sendMsg(Nodes node, String msg) {
+    public void sendMsg(Nodes node, String msg, String timestamp) {
         String endpoint = "";
         String s = "";
         node.name();
@@ -51,39 +52,37 @@ public class APISubscriptionCallback implements ICallbackSubscription{
                 endpoint = "data_over_time";
                 curBatch.setHumidity(Float.parseFloat(msg));
                 s = curBatch.toJson();
-                apiPost(endpoint, msg);
+                batchDataUpdate(endpoint, msg, timestamp);
                 break;
             case STATUS_TEMPERATURE:
                 endpoint = "data_over_time";
                 curBatch.setTemperature(Float.parseFloat(msg));
-                apiPost(endpoint, msg);
+                batchDataUpdate(endpoint, msg, timestamp);
                 break;
             case STATUS_VIBRATION:
                 endpoint = "data_over_time";
                 curBatch.setVibration(Float.parseFloat(msg));
-                apiPost(endpoint, msg);
+                batchDataUpdate(endpoint, msg, timestamp);
                 break;
             case PRODUCED_PRODUCTS:
                 endpoint = "data_over_time";
                 curBatch.setProduced(Float.parseFloat(msg));
-                apiPost(endpoint, msg);
+                batchDataUpdate(endpoint, msg, timestamp);
                 break;
             case DEFECTIVE_PRODUCTS:
                 endpoint = "data_over_time";
                 curBatch.setRejected(Integer.parseInt(msg));
-                apiPost(endpoint, msg);
+                batchDataUpdate(endpoint, msg, timestamp);
                 break;
             case STATE:
                 endpoint = "data_over_time";
                 curBatch.setState(Integer.parseInt(msg));
-                apiPost(endpoint, msg);
+                batchDataUpdate(endpoint, msg, timestamp);
                 break;
             default:
                 logger.error("This node does not exist {}: {}", node, msg);
                 return;
         }
-
-        apiPut(endpoint, s);
     }
 
 
@@ -113,13 +112,18 @@ public class APISubscriptionCallback implements ICallbackSubscription{
         return endpoint;
     }
 
+    private void batchDataUpdate(String endpoint, String msg, String timestamp){
+        if(timestamp.equals(this.timestamp)){
+            apiService.put(endpoint, msg);
+        } else{
+            apiService.post(endpoint, msg);
+            this.timestamp = timestamp;
+        }
+    }
+
 
     private void apiPut(String endpoint, String msg){
         apiService.put(endpoint, msg);
-    }
-
-    private void apiPost(String endpoint, String msg){
-        apiService.post(endpoint, msg);
     }
 
     @Override
