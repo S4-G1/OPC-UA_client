@@ -24,8 +24,36 @@ public class APISubscriptionCallback implements ICallbackSubscription{
     @Override
     public void sendMsg(Nodes node, String msg) {
         switch (node){
+            //Inventory
+            case STATUS_BARLEY:
+            case STATUS_MALT:
+            case STATUS_WHEAT:
+            case STATUS_YEAST:
+            case STATUS_HOPS:
+                //call method
+                break;
+                //Maintenance
+            case STATUS_MAINTENANCE:
+                //Call method
+                String s = String.format("{ \"value\": %s }", msg);
+                apiUpdate("maintenance/", s);
+                break;
+            //Data
+            case STATUS_HUMIDITY:
+            case STATUS_TEMPERATURE:
+            case STATUS_VIBRATION:
+            case PRODUCED_PRODUCTS:
+            case DEFECTIVE_PRODUCTS:
+            case STATE:
+            //Call method
+                break;
             default:
                 logger.error("This node does not exist {}: {}", node, msg);
         }
+    }
+
+
+    private void apiUpdate(String endpoint, String msg){
+        apiService.put(endpoint, msg);
     }
 }
