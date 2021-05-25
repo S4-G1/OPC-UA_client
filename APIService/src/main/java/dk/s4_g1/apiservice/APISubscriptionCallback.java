@@ -23,6 +23,10 @@ public class APISubscriptionCallback implements ICallbackSubscription{
 
     @Override
     public void sendMsg(Nodes node, String msg) {
+        String endpoint = "";
+        String s = "";
+        node.name();
+
         switch (node){
             //Inventory
             case STATUS_BARLEY:
@@ -30,13 +34,13 @@ public class APISubscriptionCallback implements ICallbackSubscription{
             case STATUS_WHEAT:
             case STATUS_YEAST:
             case STATUS_HOPS:
-                //call method
+                endpoint = getInventoryEndpoint(node);
+                s = String.format("{ \"value\": %s }", msg);
                 break;
-                //Maintenance
+            //Maintenance
             case STATUS_MAINTENANCE:
-                //Call method
-                String s = String.format("{ \"value\": %s }", msg);
-                apiUpdate("maintenance/", s);
+                endpoint = "maintenance/";
+                s = String.format("{ \"value\": %s }", msg);
                 break;
             //Data
             case STATUS_HUMIDITY:
@@ -45,11 +49,55 @@ public class APISubscriptionCallback implements ICallbackSubscription{
             case PRODUCED_PRODUCTS:
             case DEFECTIVE_PRODUCTS:
             case STATE:
-            //Call method
+                //Call method
+                endpoint = getBatchEndpoint(node);
                 break;
             default:
                 logger.error("This node does not exist {}: {}", node, msg);
+                return;
         }
+
+        apiUpdate(endpoint, s);
+    }
+
+
+    private String getInventoryEndpoint(Nodes node){
+        String endpoint = "";
+
+        switch (node){
+            case STATUS_BARLEY:
+                endpoint = "Barley";
+                break;
+            case STATUS_HOPS:
+                endpoint = "Hops";
+                break;
+            case STATUS_MALT:
+                endpoint = "Malt";
+                break;
+            case STATUS_WHEAT:
+                endpoint = "Wheat";
+                break;
+            case STATUS_YEAST:
+                endpoint = "Yeast";
+                break;
+            default:
+            logger.error("Something went wrong");
+        }
+
+        return endpoint;
+    }
+
+    private String getBatchEndpoint(Nodes node){
+        String endpoint = "";
+        switch (node){
+            case STATUS_HUMIDITY:
+            case STATUS_TEMPERATURE:
+            case STATUS_VIBRATION:
+            case PRODUCED_PRODUCTS:
+            case DEFECTIVE_PRODUCTS:
+            case STATE:
+        }
+        return endpoint;
     }
 
 
