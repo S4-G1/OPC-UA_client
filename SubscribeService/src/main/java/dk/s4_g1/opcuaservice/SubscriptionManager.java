@@ -98,7 +98,7 @@ public class SubscriptionManager implements ISubscriptionService {
                                 items.get(i).getNodeId().getIdentifier().toString(),
                                 values.get(i).getValue().getValue().toString());
                         Nodes n = Nodes.getNodeFromString(items.get(i).getNodeId().getIdentifier().toString());
-                        callback.sendMsg(n, values.get(i).getValue().getValue().toString());
+                        callback.sendMsg(n, values.get(i).getValue().getValue().toString(), values.get(i).getSourceTime().getJavaInstant().toString());
                     }
                 });
     }
