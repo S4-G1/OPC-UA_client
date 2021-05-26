@@ -6,6 +6,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import com.sun.net.httpserver.HttpServer;
 
+import dk.s4_g1.common.services.IHttpServerService;
+
 public class HttpServerManager implements IHttpServerService{
 
     @Override
