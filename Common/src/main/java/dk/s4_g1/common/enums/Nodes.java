@@ -5,7 +5,6 @@ public enum Nodes {
     DEFECTIVE_PRODUCTS("::Program:Cube.Admin.ProdDefectiveCount"),
     STOP_REASON_ID("::Program:Cube.Admin.StopReason.ID"),
     STOP_REASON_VALUE("::Program:Cube.Admin.StopReason.Value"),
-    BATCH_PRODUCT_ID("::Program:Cube.Admin.Parameter[0].Value"),
 
     NEXT_MACHINE_SPEED("::Program:Cube.Command.MachSpeed"),
     NEXT_MACHINE_COMMAND("::Program:Cube.Command.CntrlCmd"),
@@ -39,9 +38,9 @@ public enum Nodes {
         this.node = node;
     }
 
-    public static Nodes getNodeFromString(String s){
-        for(Nodes n : Nodes.values()){
-            if(n.node.equals(s)){
+    public static Nodes getNodeFromString(String s) {
+        for (Nodes n : Nodes.values()) {
+            if (n.node.equals(s)) {
                 return n;
             }
         }

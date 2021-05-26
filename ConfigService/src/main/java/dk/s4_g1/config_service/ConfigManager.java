@@ -15,6 +15,7 @@ public class ConfigManager implements IConfigService {
 
     private static Logger logger = LogManager.getLogger(ConfigManager.class);
     private Map<String, String> keyset;
+    private boolean fileTried = false;
 
     public ConfigManager() {
         keyset =
@@ -55,6 +56,9 @@ public class ConfigManager implements IConfigService {
     }
 
     private String variableByFile(String key) {
+        if (fileTried) {
+            return null;
+        }
         try (var reader = new Scanner(new File("config"))) {
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
@@ -73,6 +77,7 @@ public class ConfigManager implements IConfigService {
             }
         } catch (FileNotFoundException e) {
             logger.warn("Config file not founded");
+            fileTried = true;
         }
         return null;
     }

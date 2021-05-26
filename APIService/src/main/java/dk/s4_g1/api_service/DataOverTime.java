@@ -1,4 +1,4 @@
-package dk.s4_g1.apiservice;
+package dk.s4_g1.api_service;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
@@ -6,18 +6,25 @@ import com.google.gson.annotations.SerializedName;
 public class DataOverTime {
     @SerializedName("batch_id")
     private int batchId;
+
     @SerializedName("measurement_ts")
     private String msTime = "";
+
     @SerializedName("temperature")
     private float temperature = 0;
+
     @SerializedName("humidity")
     private float humidity = 0;
+
     @SerializedName("vibration")
     private float vibration = 0;
+
     @SerializedName("produced")
     private float produced = 0;
+
     @SerializedName("state")
     private int state = 0;
+
     @SerializedName("rejected")
     private int rejected = 0;
 
