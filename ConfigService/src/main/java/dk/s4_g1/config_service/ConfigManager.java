@@ -22,7 +22,8 @@ public class ConfigManager implements IConfigService {
                 new HashMap<>(
                         Map.of(
                                 "API_URL", "https://api.bierproductie.nymann.dev",
-                                "BEER_URL", "opc.tcp://127.0.0.1:4840"));
+                                "BEER_URL", "127.0.0.1",
+                                "BEER_PORT", "4840"));
         logger.info("IConfigService - ConfigManger Created");
     }
 
