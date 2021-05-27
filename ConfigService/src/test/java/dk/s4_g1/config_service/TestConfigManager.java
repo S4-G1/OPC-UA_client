@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 
 import dk.s4_g1.common.services.IConfigService;
 
-import org.apache.logging.log4j.*;
 import org.junit.jupiter.api.*;
 
 import java.io.File;

@@ -93,7 +93,7 @@ public class DataOverTime {
     }
 
     public String toJson() {
-        Gson gson = new Gson();
+        var gson = new Gson();
         return gson.toJson(this);
     }
 }

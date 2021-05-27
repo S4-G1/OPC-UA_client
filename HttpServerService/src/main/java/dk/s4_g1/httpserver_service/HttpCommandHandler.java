@@ -26,7 +26,7 @@ public class HttpCommandHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) {
 
-        JSONObject json = getJsonObjectFromExchange(exchange);
+        var json = getJsonObjectFromExchange(exchange);
         logger.info("Got new Command request: {}", json.toString());
 
         var command = Commands.getCommand(json.getString("method")).get();
@@ -42,7 +42,7 @@ public class HttpCommandHandler implements HttpHandler {
     }
 
     private JSONObject getJsonObjectFromExchange(HttpExchange exchange) {
-        String jsonString =
+        var jsonString =
                 new BufferedReader(
                                 new InputStreamReader(
                                         exchange.getRequestBody(), StandardCharsets.UTF_8))

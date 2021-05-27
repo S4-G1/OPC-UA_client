@@ -26,7 +26,7 @@ public class HttpBatchHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) {
 
-        JSONObject json = getJsonObjectFromExchange(exchange);
+        var json = getJsonObjectFromExchange(exchange);
         logger.info("Got new request: {}", json.toString());
 
         var batchId = json.getInt("batch_id");
@@ -55,7 +55,7 @@ public class HttpBatchHandler implements HttpHandler {
     }
 
     private JSONObject getJsonObjectFromExchange(HttpExchange exchange) {
-        String jsonString =
+        var jsonString =
                 new BufferedReader(
                                 new InputStreamReader(
                                         exchange.getRequestBody(), StandardCharsets.UTF_8))

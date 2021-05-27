@@ -29,15 +29,11 @@ public class APISubscriptionCallback implements ICallbackSubscription {
     @Override
     public void sendMsg(Nodes node, String msg, String timestamp) {
         logger.debug("Node: {}, msg: {}, timestap: {}", node, msg, timestamp);
-        String endpoint = "";
+        var endpoint = "";
 
         switch (node) {
                 // Inventory
-            case STATUS_BARLEY:
-            case STATUS_MALT:
-            case STATUS_WHEAT:
-            case STATUS_YEAST:
-            case STATUS_HOPS:
+            case STATUS_BARLEY, STATUS_MALT, STATUS_WHEAT, STATUS_YEAST, STATUS_HOPS:
                 endpoint = getInventoryEndpoint(node);
                 apiPut(endpoint, String.format("{ \"current_value\": %s }", msg));
                 break;
@@ -86,7 +82,7 @@ public class APISubscriptionCallback implements ICallbackSubscription {
     }
 
     private String getInventoryEndpoint(Nodes node) {
-        String endpoint = "inventory_statuses/%s";
+        var endpoint = "inventory_statuses/%s";
 
         switch (node) {
             case STATUS_BARLEY:
@@ -107,7 +103,7 @@ public class APISubscriptionCallback implements ICallbackSubscription {
     }
 
     private void batchDataUpdate(String timestamp) {
-        String endpoint = "data_over_time/";
+        var endpoint = "data_over_time/";
         if (curBatch.getBatchId() == 0) {
             logger.warn(
                     "Batch id: {} it should not be zero else it can not post",
