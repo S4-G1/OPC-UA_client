@@ -26,21 +26,6 @@ public class Main {
         client.sendCmdInt(Nodes.NEXT_MACHINE_COMMAND, Commands.RESET.id);
         client.sendCmdBool(Nodes.EXECUTE_MACHINE_CMD, true);
 
-        try {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-            logger.warn("Could not sleep");
-        }
-
-        client.sendCmdFloat(Nodes.NEXT_BATCH_ID, 18);
-        client.sendCmdFloat(Nodes.NEXT_RECIPE_TYPE, Recipes.PILSNER.ordinal());
-        client.sendCmdFloat(Nodes.NEXT_PRODUCT_AMOUNT, 500);
-        client.sendCmdFloat(Nodes.NEXT_MACHINE_SPEED, 300);
-
-        // start
-        client.sendCmdInt(Nodes.NEXT_MACHINE_COMMAND, Commands.START.id);
-        client.sendCmdBool(Nodes.EXECUTE_MACHINE_CMD, true);
-
         logger.info("Pres any key for exit");
         new Scanner(System.in).next();
         System.exit(0);

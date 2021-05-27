@@ -2,7 +2,8 @@ package dk.s4_g1.httpserver_service;
 
 import com.sun.net.httpserver.HttpServer;
 
-import dk.s4_g1.common.services.IHttpServerService;
+import dk.s4_g1.common.services.*;
+import dk.s4_g1.common.util.*;
 
 import org.apache.logging.log4j.*;
 
@@ -15,11 +16,17 @@ public class HttpServerManager implements IHttpServerService {
 
     @Override
     public void start() {
+        var oCommandManager = ServiceLoader.getDefault(ICommandService.class);
+        if (oCommandManager.isEmpty()) {
+            logger.error("Could not create ICommandService");
+            return;
+        }
         try {
             ThreadPoolExecutor threadPoolExecutor =
                     (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
             HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8001), 0);
-            server.createContext("/batch", new HttpBatchHandler());
+            server.createContext("/batch", new HttpBatchHandler(oCommandManager.get()));
+            server.createContext("/command", new HttpCommandHandler(oCommandManager.get()));
             server.setExecutor(threadPoolExecutor);
             // HandlerFactory.getInstance(true);
             server.start();

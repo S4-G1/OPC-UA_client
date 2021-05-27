@@ -15,11 +15,11 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
-public class HttpBatchHandler implements HttpHandler {
+public class HttpCommandHandler implements HttpHandler {
     private ICommandService client;
     private static Logger logger = LogManager.getLogger(HttpServerManager.class);
 
-    public HttpBatchHandler(ICommandService commandService) {
+    public HttpCommandHandler(ICommandService commandService) {
         this.client = commandService;
     }
 
@@ -27,26 +27,13 @@ public class HttpBatchHandler implements HttpHandler {
     public void handle(HttpExchange exchange) {
 
         JSONObject json = getJsonObjectFromExchange(exchange);
-        logger.info("Got new request: {}", json.toString());
+        logger.info("Got new Command request: {}", json.toString());
 
-        var batchId = json.getInt("batch_id");
-        var recipe = Recipes.getProduct(json.getString("recipe")).get();
-        var amountToProduce = json.getFloat("amount_to_produce");
-        var speed = json.getFloat("speed");
-        logger.info(
-                "Got a batch. batch_id: {}, recipe: {}, amount_to_produce: {}, speed: {}",
-                batchId,
-                recipe,
-                amountToProduce,
-                speed);
+        var command = Commands.getCommand(json.getString("method")).get();
 
-        client.sendCmdFloat(Nodes.NEXT_BATCH_ID, batchId);
-        client.sendCmdFloat(Nodes.NEXT_RECIPE_TYPE, recipe.ordinal());
-        client.sendCmdFloat(Nodes.NEXT_PRODUCT_AMOUNT, amountToProduce);
-        client.sendCmdFloat(Nodes.NEXT_MACHINE_SPEED, speed);
+        logger.info("Got command: {}", command);
 
-        // start
-        client.sendCmdInt(Nodes.NEXT_MACHINE_COMMAND, Commands.START.id);
+        client.sendCmdInt(Nodes.NEXT_MACHINE_COMMAND, command.id);
         client.sendCmdBool(Nodes.EXECUTE_MACHINE_CMD, true);
         try {
             exchange.sendResponseHeaders(201, -1);
