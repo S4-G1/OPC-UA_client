@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class HttpCommandHandler implements HttpHandler {
     private ICommandService client;
-    private static Logger logger = LogManager.getLogger(HttpServerManager.class);
+    private static Logger logger = LogManager.getLogger(HttpCommandHandler.class);
 
     public HttpCommandHandler(ICommandService commandService) {
         this.client = commandService;

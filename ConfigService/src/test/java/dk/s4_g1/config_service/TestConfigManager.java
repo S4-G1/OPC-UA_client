@@ -48,7 +48,8 @@ class TestConfigManager {
     @Test
     void TestLoadConfig() {
         assertEquals(Optional.of("https://api.bierproductie.nymann.dev"), cm.getConfig("API_URL"));
-        assertEquals(Optional.of("opc.tcp://127.0.0.1:4840"), cm.getConfig("BEER_URL"));
+        assertEquals(Optional.of("127.0.0.1"), cm.getConfig("BEER_URL"));
+        assertEquals(Optional.of("4840"), cm.getConfig("BEER_PORT"));
         assertEquals(Optional.empty(), cm.getConfig("BEER_PASSWORD"));
         assertEquals(Optional.empty(), cm.getConfig("BEER_USER"));
         assertEquals(
