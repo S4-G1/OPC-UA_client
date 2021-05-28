@@ -10,4 +10,4 @@ services:
       - .env
     ports:
       - 8001:8001
-    command: echo hello
+    command: java -jar Core/target/Core-0.0.1.jar

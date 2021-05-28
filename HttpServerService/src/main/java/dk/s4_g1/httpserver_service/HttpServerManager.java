@@ -22,8 +22,7 @@ public class HttpServerManager implements IHttpServerService {
             return;
         }
         try {
-            var threadPoolExecutor =
-                    (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+            var threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
             HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8001), 0);
             server.createContext("/batch", new HttpBatchHandler(oCommandManager.get()));
             server.createContext("/command", new HttpCommandHandler(oCommandManager.get()));

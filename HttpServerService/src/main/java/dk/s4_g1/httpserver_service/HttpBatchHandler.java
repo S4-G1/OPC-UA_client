@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class HttpBatchHandler implements HttpHandler {
     private ICommandService client;
-    private static Logger logger = LogManager.getLogger(HttpServerManager.class);
+    private static Logger logger = LogManager.getLogger(HttpBatchHandler.class);
 
     public HttpBatchHandler(ICommandService commandService) {
         this.client = commandService;
