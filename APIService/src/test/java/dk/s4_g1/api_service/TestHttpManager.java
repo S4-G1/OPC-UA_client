@@ -1,4 +1,4 @@
-package dk.s4_g1.apiservice;
+package dk.s4_g1.api_service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

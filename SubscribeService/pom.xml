@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>S4G1ModulesParent</artifactId>
+        <groupId>dk.s4_g1</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>SubscribeService</artifactId>
+
+    <!-- Dependencies! -->
+    <dependencies>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>Common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>CommonOpcUa</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>OPC-UAService</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>CommandService</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.milo</groupId>
+            <artifactId>sdk-client</artifactId>
+            <version>0.6.1</version>
+        </dependency>
+    </dependencies>
+
+</project>

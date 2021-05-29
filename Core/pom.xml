@@ -17,6 +17,42 @@
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>APIService</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>OPC-UAService</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>OPC-UAService</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>SubscribeService</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>APIService</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>HttpServerService</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <!-- Build! -->

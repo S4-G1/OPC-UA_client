@@ -16,12 +16,6 @@
             <groupId>dk.s4_g1</groupId>
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.konghq</groupId>
-            <artifactId>unirest-java</artifactId>
-            <version>3.7.02</version>
         </dependency>
     </dependencies>
 
