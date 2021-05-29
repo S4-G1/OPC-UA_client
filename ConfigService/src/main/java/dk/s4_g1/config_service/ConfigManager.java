@@ -15,13 +15,15 @@ public class ConfigManager implements IConfigService {
 
     private static Logger logger = LogManager.getLogger(ConfigManager.class);
     private Map<String, String> keyset;
+    private boolean fileTried = false;
 
     public ConfigManager() {
         keyset =
                 new HashMap<>(
                         Map.of(
                                 "API_URL", "https://api.bierproductie.nymann.dev",
-                                "BEER_URL", "opc.tcp://127.0.0.1:4840"));
+                                "BEER_URL", "127.0.0.1",
+                                "BEER_PORT", "4840"));
         logger.info("IConfigService - ConfigManger Created");
     }
 
@@ -55,6 +57,9 @@ public class ConfigManager implements IConfigService {
     }
 
     private String variableByFile(String key) {
+        if (fileTried) {
+            return null;
+        }
         try (var reader = new Scanner(new File("config"))) {
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
@@ -73,6 +78,7 @@ public class ConfigManager implements IConfigService {
             }
         } catch (FileNotFoundException e) {
             logger.warn("Config file not founded");
+            fileTried = true;
         }
         return null;
     }

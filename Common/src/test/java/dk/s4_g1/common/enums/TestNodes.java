@@ -26,7 +26,6 @@ class TestNodes {
         assertEquals("::Program:Cube.Admin.ProdDefectiveCount", Nodes.DEFECTIVE_PRODUCTS.node);
         assertEquals("::Program:Cube.Admin.StopReason.ID", Nodes.STOP_REASON_ID.node);
         assertEquals("::Program:Cube.Admin.StopReason.Value", Nodes.STOP_REASON_VALUE.node);
-        assertEquals("::Program:Cube.Admin.Parameter[0].Value", Nodes.BATCH_PRODUCT_ID.node);
 
         assertEquals("::Program:Cube.Status.StateCurrent", Nodes.STATE.node);
         assertEquals("::Program:Cube.Status.MachSpeed", Nodes.SPEED.node);

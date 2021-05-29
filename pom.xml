@@ -23,6 +23,7 @@
         <module>Common</module>
         <module>CommonOpcUa</module>
         <module>ConfigService</module>
+        <module>HttpServerService</module>
         <module>APIService</module>
         <module>OPC-UAService</module>
         <module>CommandService</module>

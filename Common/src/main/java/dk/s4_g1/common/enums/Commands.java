@@ -1,5 +1,7 @@
 package dk.s4_g1.common.enums;
 
+import java.util.Optional;
+
 public enum Commands {
     RESET(1),
     START(2),
@@ -11,5 +13,14 @@ public enum Commands {
 
     private Commands(int id) {
         this.id = id;
+    }
+
+    public static Optional<Commands> getCommand(String name) {
+        for (Commands command : Commands.values()) {
+            if (name.equalsIgnoreCase(command.name())) {
+                return Optional.of(command);
+            }
+        }
+        return Optional.empty();
     }
 }

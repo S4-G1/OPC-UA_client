@@ -9,7 +9,6 @@ import dk.s4_g1.common.util.ServiceLoaderException;
 import dk.s4_g1.common_opcua.services.IOpcUaClientService;
 
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
-import org.eclipse.milo.opcua.stack.core.types.builtin.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 

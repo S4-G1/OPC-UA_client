@@ -47,6 +47,12 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>dk.s4_g1</groupId>
+            <artifactId>HttpServerService</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <!-- Build! -->

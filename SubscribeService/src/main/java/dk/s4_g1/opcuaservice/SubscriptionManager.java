@@ -89,16 +89,21 @@ public class SubscriptionManager implements ISubscriptionService {
     }
 
     @Override
-    public void addCallback(ICallbackSubscription callback){
+    public void addCallback(ICallbackSubscription callback) {
         subscriptions.addDataChangeListener(
                 (items, values) -> {
                     for (int i = 0; i < items.size(); i++) {
-                        logger.info(
+                        logger.debug(
                                 "subscription value received: item={}, value={}",
-                                items.get(i).getNodeId().getIdentifier().toString(),
-                                values.get(i).getValue().getValue().toString());
-                        Nodes n = Nodes.getNodeFromString(items.get(i).getNodeId().getIdentifier().toString());
-                        callback.sendMsg(n, values.get(i).getValue().getValue().toString(), values.get(i).getSourceTime().getJavaInstant().toString());
+                                items.get(i).getNodeId().getIdentifier(),
+                                values.get(i).getValue().getValue());
+                        var node =
+                                Nodes.getNodeFromString(
+                                        items.get(i).getNodeId().getIdentifier().toString());
+                        callback.sendMsg(
+                                node,
+                                values.get(i).getValue().getValue().toString(),
+                                values.get(i).getSourceTime().getJavaInstant().toString());
                     }
                 });
     }
